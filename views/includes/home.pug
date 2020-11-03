@@ -1,0 +1,259 @@
+block styles
+  style.
+    .block2-overlay.carousel:hover {
+        background: url('#{hermescraftUrl}images/master-slide-08.jpg');
+        opacity: 1;
+        background-size: cover;
+        background-position: center 0;
+        cursor: pointer;
+    }
+
+    .block2-overlay.category:hover {
+        background: url('#{hermescraftUrl}images/item-03.jpg');
+        opacity: 1;
+        background-size: cover;
+        background-position: center 0;
+        cursor: pointer;
+    }
+
+    .block2-overlay.background:hover {
+        background: url('#{hermescraftUrl}images/bg-banner-02.jpg');
+        opacity: 1;
+        background-size: cover;
+        background-position: center 0;
+        cursor: pointer;
+    }
+
+    .block2-overlay.newproduct:hover {
+        background: url('#{hermescraftUrl}images/shop-item-09.jpg');
+        opacity: 1;
+        background-size: cover;
+        background-position: center 0;
+        cursor: pointer;
+    }
+
+hr
+each carol,index in page.carousel
+  form(action='/pages/update' method="POST" enctype="multipart/form-data").leave-comment
+    input.d-none(type="file" name="background" id='carouselBackgroundInput_'+index onchange="handleFiles(this,'"+index+"')")
+    input(type="hidden" name="page" value=page._id)
+    input(type="hidden" name="part" value="carousel")
+    input(type="hidden" name="carousel" value=carol._id)
+    input(type="hidden" name="link" value=carol.link._id)
+    input(type="hidden" name="link_text" value=carol.link.text._id)
+    input(type="hidden" name="header" value=carol.header._id)
+    input(type="hidden" name="description" value=carol.description._id)
+    input(type="hidden" name="background_id" value=carol.background._id)
+    .row
+      .col-lg-8.p-b-30
+        .block2
+          .block2-img.wrap-pic-w.of-hidden.pos-relative
+            img(src=hermescraftUrl+"images/"+carol.background.name id="carouselBackground_"+index alt="IMG-ABOUT" style="cursor: pointer")
+            .block2-overlay.carousel.trans-0-4.d-flex.flex-column.align-items-end.pr-1(onclick="$('#carouselBackgroundInput_"+index+"').click()")
+      .col-lg-4.p-b-30
+        .row
+          .col-9.respon5
+            .of-hidden.m-b-15
+              .flex-m.flex-w.p-b-10
+                .s-text15.w-100
+                  b Header
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="header_text" value=carol.header.data placeholder="Carousel Item Header" required="required")
+          .col-3.respon5.px-lg-0
+            .of-hidden.m-b-15
+              .flex-m.flex-w.p-b-10
+                .s-text15.w-100
+                  b Color
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7(type="color" name="header_color" value=carol.header.color)
+          .col-9.respon5
+            .of-hidden.m-b-15
+              .flex-m.flex-w.p-b-10
+                .s-text15.w-100
+                  b Description
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="description_text" value=carol.description.data placeholder="Carousel Item  Description" required="required")
+          .col-3.respon5.px-lg-0
+            .of-hidden.m-b-15
+              .flex-m.flex-w.p-b-10
+                .s-text15.w-100
+                  b Color
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7(type="color" name="description_color" value=carol.description.color)
+          .col-9.respon5
+            .of-hidden.m-b-15
+              .flex-m.flex-w.p-b-10
+                .s-text15.w-100
+                  b Link Text
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="link_text_data" value=carol.link.text.data placeholder="Section Header" required="required")
+          .col-3.respon5.px-lg-0
+            .of-hidden.m-b-15
+              .flex-m.flex-w.p-b-10
+                .s-text15.w-100
+                  b Color
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7(type="color" name="link_text_color" value=carol.link.text.color)
+          .col-12.respon5
+            .of-hidden.m-b-15
+              .flex-m.flex-w.p-b-10
+                .s-text15.w-100
+                  b Link URL
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="link_path" value=carol.link.path placeholder="Section Header" required="required")
+          .col-12.d-flex.justify-content-end
+            // Button
+            button(type="submit").btn.btn-lg.btn-dark.px-5.rounded-pill.flex-c-m.bo-rad-23.hov0.m-text3.trans-0-4
+              | Update Item
+    hr
+.row
+  each category, index in categories
+    .col-md-4
+      form(action='/pages/update' method="POST" enctype="multipart/form-data").leave-comment
+        input(type="hidden" name="page" value=page._id)
+        input(type='hidden' name='part' value='category')
+        input(type='hidden' name='category' value=category._id)
+        input(type='hidden' name='link' value=category.link._id)
+        input(type='hidden' name='imageId' value=category.image._id)
+        input(type='hidden' name='link_text_id' value=category.link.text._id)
+        input.d-none(type='file' name='image'  id="categoryImageInput_"+index onchange="handleFiles(this,'"+index+"')")
+        .row
+          .col-12
+            .block2
+              .block2-img.wrap-pic-w.of-hidden.pos-relative
+                img(src=hermescraftUrl+"images/"+category.image.name id="categoryImage_"+index alt="IMG-ABOUT" style="cursor: pointer")
+                .block2-overlay.category.trans-0-4.d-flex.flex-column.align-items-end.pr-1(onclick="$('#categoryImageInput_"+index+"').click()")
+          .col-12
+            .of-hidden.m-b-15.m-t-15
+              .flex-m.flex-w.p-b-10
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="name" value=category.name placeholder="Category Name" required="required")
+          .col-md-10
+            .of-hidden.m-b-5
+              .flex-m.flex-w.p-b-10
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="link_text" value=category.link.text.data placeholder="Link Text" required="required")
+          .col-md-2.pl-lg-0
+            .of-hidden.m-b-5
+              .flex-m.flex-w.p-b-10
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7(type="color" name="link_color" value=category.link.text.color)
+          .col-12
+            .of-hidden.m-b-5
+              .flex-m.flex-w.p-b-10
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="link_path" value=category.link.path placeholder="Link Path" required="required")
+        .form-group.d-flex.justify-content-center
+          // Button
+          button(type="submit").btn.btn-lg.btn-dark.px-5.rounded-pill.flex-c-m.bo-rad-23.hov0.m-text3.trans-0-4
+            | Update Item
+hr
+form(action='/pages/update' method="POST" enctype="multipart/form-data").leave-comment
+  input(type="hidden" name="page" value=page._id)
+  input(type='hidden' name='part' value='countdown')
+  input(type='hidden' name='section' value=page.sections[2]._id)
+  input(type='hidden' name='link' value=page.sections[2].links[0]._id)
+  input(type='hidden' name='linkText' value=page.sections[2].links[0].text._id)
+  input(type='hidden' name='oldpriceId' value=page.sections[2].spans[0]._id)
+  input(type='hidden' name='newpriceId' value=page.sections[2].spans[1]._id)
+  input(type='hidden' name='daysId' value=page.sections[2].spans[2]._id)
+  input(type='hidden' name='hoursId' value=page.sections[2].spans[4]._id)
+  input(type='hidden' name='minutesId' value=page.sections[2].spans[6]._id)
+  input(type='hidden' name='secondsId' value=page.sections[2].spans[8]._id)
+  input(type='hidden' name='imageId' value=page.sections[2].images[0]._id)
+  input(type='hidden' name='backgroundId' value=page.sections[2].background._id)
+  input.d-none(type='file' name='image'  id="countdownImageInput_"+index onchange="handleFiles(this,'"+index+"')")
+  input.d-none(type='file' name='background'  id="countdownBackgroundInput_"+index onchange="handleFiles(this,'"+index+"')")
+  .row
+    .col-12
+      .block2
+        .block2-img.wrap-pic-w.of-hidden.pos-relative.bg-img1
+          img(src=hermescraftUrl+"images/"+page.sections[2].background.name id="countdownBackground_"+index alt="IMG-ABOUT" style="cursor: pointer; object-fit: contain;")
+          .block2-overlay.background.trans-0-4.d-flex.flex-column.align-items-end.pr-1(onclick="$('#countdownBackgroundInput_"+index+"').click()")
+  .row.mt-2
+    .col-md-4.d-flex.align-items-center
+      .block2
+        .block2-img.wrap-pic-w.of-hidden.pos-relative
+          img(src=hermescraftUrl+"images/"+page.sections[2].images[0].name id="countdownImage_"+index alt="IMG-ABOUT" style="cursor: pointer")
+          .block2-overlay.newproduct.trans-0-4.d-flex.flex-column.align-items-end.pr-1(onclick="$('#countdownImageInput_"+index+"').click()")
+    .col-md-4
+      .row
+        .col-lg-9.pl-lg-0
+          .form-group.mb-1
+            label.s-text17.m-0(for="oldprice") 
+              b Old Price
+            .input-group
+              .input-group-append
+                span.input-group-text $
+              input.form-control.border(type="number" step=0.01 name="oldprice" value=page.sections[2].spans[0].data)
+        .col-lg-3.p-lg-0
+          .form-group.mb-1
+            label.s-text17.m-0(for="oldprice_color")
+              b Color
+            input.form-control.s-text7.p-0(type="color" name="oldprice_color" value=page.sections[2].spans[0].color)
+        .col-lg-9.pl-lg-0
+          .form-group.mb-1
+            label.s-text17.m-0(for="newprice") 
+              b New Price
+            .input-group
+              .input-group-append
+                span.input-group-text $
+              input.form-control.border(type="number" step=0.01 name="newprice" value=page.sections[2].spans[1].data)
+        .col-lg-3.p-lg-0
+          .form-group.mb-1
+            label.s-text17.m-0(for="newprice_color")
+              b Color
+            input.form-control.s-text7.p-0(type="color" name="newprice_color" value=page.sections[2].spans[1].color)
+        .col-12.p-lg-0
+          .form-group.mb-1
+            label.s-text17.m-0(for="link_path")
+              b Product Link
+            input.form-control.s-text7.border(type="text" name="link_path" value=page.sections[2].links[0].path placeholder="Link Path" required="required")
+        .col-lg-9.pl-lg-0
+          .form-group.mb-1
+            label.s-text17.m-0(for="link_text")
+              b Link Text
+            input.form-control.s-text7.border(type="text" name="link_text" value=page.sections[2].links[0].text.data placeholder="Link Text" required="required")
+        .col-lg-3.p-lg-0
+          .form-group.mb-1
+            label.s-text17.m-0(for="link_color")
+              b Color
+            input.form-control.s-text7.p-0(type="color" name="link_color" value=page.sections[2].links[0].text.color)
+    .col-md-4
+      .row
+        .col-12.p-rg-0
+          .form-group.mb-1
+            label.s-text17.m-0(for="days") 
+              b Countdown
+            .input-group
+              input.form-control.border(type="number" name="days" value=page.sections[2].spans[2].data)
+              .input-group-prepend
+                span.input-group-text #{page.sections[2].spans[3].data}
+        .col-12.p-rg-0
+          .form-group.mb-1
+            label.s-text17.m-0.text-white(for="hours") &nbscp;
+            .input-group
+              input.form-control.border(type="number" name="hours" value=page.sections[2].spans[4].data)
+              .input-group-prepend
+                span.input-group-text #{page.sections[2].spans[5].data}
+        .col-lg-6.p-rg-0
+          .form-group.mb-1
+            label.s-text17.m-0.text-white(for="minutes") &nbscp;
+            .input-group
+              input.form-control.border(type="number" name="minutes" value=page.sections[2].spans[6].data)
+              .input-group-prepend
+                span.input-group-text #{page.sections[2].spans[7].data}
+        .col-lg-6.p-rg-0
+          .form-group.mb-1
+            label.s-text17.m-0.text-white(for="seconds") &nbscp;
+            .input-group
+              input.form-control.border(type="number" name="seconds" value=page.sections[2].spans[8].data)
+              .input-group-prepend
+                span.input-group-text #{page.sections[2].spans[9].data}
+        .col-12.mt-3
+          .form-group.d-flex.justify-content-center
+            // Button
+            button(type="submit").btn.btn-lg.btn-primary.px-5.rounded-pill.flex-c-m.bo-rad-23.hov0.m-text3.trans-0-4
+              | Update
+              
+          

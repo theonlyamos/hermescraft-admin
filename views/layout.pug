@@ -1,0 +1,194 @@
+doctype html
+html(lang="en")
+  head
+    title= title
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    // ===============================================================================================
+    link(rel="shortcut icon" type="image/x-icon" href="/images/icons/favicon.ico")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/fonts/font-awesome-5.13.0/css/all.min.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/fonts/themify/themify-icons.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/fonts/Linearicons-Free-v1.0.0/icon-font.min.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/fonts/elegant-font/html-css/style.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/vendor/animate/animate.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/vendor/slick/slick.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/vendor/lightbox2/css/lightbox.min.css")
+    // ===============================================================================================
+    link(rel="stylesheet" type="text/css" href="/css/util.css")
+    link(rel="stylesheet" type="text/css" href="/css/main.css")
+    // ===============================================================================================
+    style.
+      .block2-overlay.banner:hover {
+          opacity: 1;
+          background: url('#{hermescraftUrl}images/heading-pages-06.jpg');
+          background-size: cover;
+          background-position: center;
+          cursor: pointer;
+      }
+    block styles
+  body.animsition
+    // Header
+    header.header3
+      // Header desktop
+      .container-menu-header-v3.justify-content-center
+        .wrap_header3.text-center
+          // Logo
+          a.logo3(href="/")
+            img(src="/images/icons/hermescraft-2.png" alt="IMG-LOGO")
+          // Header Icon
+          .header-icons3.pt-3.p-b-60.p-l-8
+            a.header-wrapicon1.dis-block.w-100.d-flex.flex-column.align-items-center(href="#")
+              i.fa.fa-user-circle.fa-3x.fa-fw.text-dark
+              small.text-secondary theonlyamos@gmail.com
+          // Menu
+          .wrap_menu
+            nav.menu
+              ul.main_menu.nav
+                li.p-0.mb-2
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/") 
+                    i.fas.fa-chart-pie.pr-2
+                    | Dashboard
+                li.p-0.mb-2
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/products") 
+                    i.fas.fa-shopping-basket.pr-2
+                    | Products
+                li.p-0.mb-2
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/orders") 
+                    i.fas.fa-shopping-cart.pr-2
+                    | Orders
+                li.p-0.mb-2
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/customers") 
+                    i.fas.fa-users.pr-2
+                    | Customers
+                li.p-0.mb-2
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/pages") 
+                    i.fas.fa-file.pr-2
+                    | Pages
+                li.p-0.mb-2
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/coupons") 
+                    i.fas.fa-money-check.pr-2
+                    | Coupons 
+                li.p-0.mb-2
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/coupons") 
+                    i.fas.fa-users-cog.pr-2
+                    | Administrators 
+                li.p-0.mb-2
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/coupons") 
+                    i.fas.fa-user-shield.pr-2
+                    | Account 
+                li.p-0.mb-2
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/settings") 
+                    i.fa.fa-cogs.pr-2
+                    | Settings
+                li.mt-2.pr-2.rounded
+                  a.text-danger(href="/logout") 
+                    i.fa.fa-sign-in.fa-fw
+                    | Logout
+        .bottombar.flex-col-c
+          .bottombar-social.t-center.p-b-8
+            a.topbar-social-item.fab.fa-facebook(href="#")
+            a.topbar-social-item.fab.fa-instagram(href="#")
+            a.topbar-social-item.fab.fa-pinterest-p(href="#")
+            a.topbar-social-item.fab.fa-snapchat-ghost(href="#")
+            a.topbar-social-item.fab.fa-youtube-play(href="#")
+          .bottombar-child2.p-r-20
+            .topbar-language.rs1-select2
+              select.selection-1(name="time")
+                option USD
+                option EUR
+      // Header Mobile
+      .wrap_header_mobile
+        // Logo moblie
+        a.logo-mobile(href="/")
+          img(src="/images/icons/hermescraft-2.png" alt="IMG-LOGO")
+        // Button show menu
+        .btn-show-menu
+          // Header Icon mobile
+          .header-icons-mobile
+            //include ../includes/userMenu.pug
+            span.linedivide2
+          .btn-show-menu-mobile.hamburger.hamburger--squeeze
+            span.hamburger-box
+              span.hamburger-inner
+      // Menu Mobile
+      .wrap-side-menu
+        nav.side-menu
+          ul.main-menu
+            li.item-topbar-mobile.p-l-10
+              .topbar-social-mobile
+                a.topbar-social-item.fab.fa-facebook(href="#")
+                a.topbar-social-item.fab.fa-instagram(href="#")
+                a.topbar-social-item.fab.fa-pinterest-p(href="#")
+                a.topbar-social-item.fab.fa-snapchat-ghost(href="#")
+                a.topbar-social-item.fab.fa-youtube-play(href="#")
+            li.item-menu-mobile.bg-dark
+              a(href="/") Dashboard
+            li.item-menu-mobile.bg-dark
+              a(href="/products") Products
+            li.item-menu-mobile.bg-dark
+              a(href="/orders") Orders
+            li.item-menu-mobile.bg-dark
+              a(href="/customers") Customers
+            li.item-menu-mobile.bg-dark
+              a(href="/pages") Pages
+            li.item-menu-mobile.bg-dark
+              a(href="/coupons") Coupons
+            li.item-menu-mobile.bg-dark
+              a(href="/administrators") Administrators
+            li.item-menu-mobile.bg-dark
+              a(href="/account") Account
+            li.item-menu-mobile.bg-dark
+              a(href="/settings") Settings
+            li.item-menu-mobile.bg-danger
+              a(href="/logout") Logout
+    block content
+
+    // ===============================================================================================
+    script(type="text/javascript" src="/vendor/jquery/jquery-3.2.1.min.js")
+    // ===============================================================================================
+    script(type="text/javascript" src="/vendor/animsition/js/animsition.min.js")
+    // ===============================================================================================
+    script(type="text/javascript" src="/vendor/bootstrap/js/popper.js")
+    script(type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js")
+    // ===============================================================================================
+    script(type="text/javascript" src="/vendor/select2/select2.min.js")
+    script(type="text/javascript").
+      $(".selection-1").select2({
+      minimumResultsForSearch: 20,
+      dropdownParent: $('#dropDownSelect1')
+      });
+      $(".selection-2").select2({
+      minimumResultsForSearch: 20,
+      dropdownParent: $('#dropDownSelect2')
+      });
+    // ===============================================================================================
+    script(type="text/javascript" src="/vendor/slick/slick.min.js")
+    script(type="text/javascript" src="/js/slick-custom.js")
+    // ===============================================================================================
+    script(type="text/javascript" src="/vendor/countdowntime/countdowntime.js")
+    // ===============================================================================================
+    script(type="text/javascript" src="/vendor/lightbox2/js/lightbox.min.js")
+    // ===============================================================================================
+    script(type="text/javascript" src="/vendor/sweetalert/sweetalert.min.js")
+
+    block scripts
+    
+    // ===============================================================================================
+    script(src="/js/main.js")

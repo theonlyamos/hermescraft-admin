@@ -1,0 +1,87 @@
+extends layout
+
+block styles
+  link(rel="stylesheet" type="text/css" href="/vendor/datatables/datatables.bundle.css")
+
+block content
+  .container1-page
+    // breadcrumb
+    .bread-crumb.bgwhite.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
+      a.s-text16(href="/")
+        | Home
+        i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+      span.s-text17(href="/customers")
+        | customers
+
+    // Content page
+    section.bgwhite.p-t-55.p-b-65
+      .container
+        .flex-sb-m.flex-w.p-b-35
+          .flex-w
+            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
+              input.form-control.bcustomer-0.s-text7.w-100(type="search" name="search" placeholder="Search")
+          span.s-text8.p-t-5.p-b-5
+            | Showing #{customers.length}–#{customers.length < 12 ? customers.length : 12} of #{totalDocs} results
+        // customers 
+        .table-responsive
+          table.table.table-striped.table-hover#m_table_1
+            thead.bg-dark
+              tr.s-text15.text-white
+                th 
+                  .custom-control.custom-checkbox
+                      input.input.custom-control-input(type="checkbox" id="all")
+                      label.custom-control-label(for="all")
+                th Image
+                th Name
+                th Email
+                th Date
+                th Orders
+                th.text-center Actions
+            tbody
+              each customer in customers
+                tr.s-text15(id=customer._id)
+                  td.d-flex.align-items-center(style="height: 80px")
+                    .custom-control.custom-checkbox
+                      input.input.custom-control-input(type="checkbox" id="check_"+customer._id)
+                      label.custom-control-label(for="check_"+customer._id)
+                  td
+                    img(src=hermescraftUrl+"images/icons/icon-header-01.png" alt=customer.username style="width: 50px; height: auto; object-fit: cover")
+                  td(style="line-height: 60px") #{customer.first_name} #{customer.last_name}
+                  td(style="line-height: 60px") #{customer.username}
+                  td(style="line-height: 60px") #{new Date(customer.createdAt).toUTCString()}
+                  td(style="line-height: 60px") #{customer.orders}
+                  td.d-flex.justify-content-center.align-items-center(style="height: 80px")
+                    .dropdown
+                      button.btn.btn-outline-secondary.rounded-circle.p-0.d-flex.align-items-center.justify-content-center(data-toggle='dropdown' style="width: 25px; height: 25px" aria-haspopup="true" aria-expanded="false")
+                        i.fas.fa-ellipsis-v
+                      .dropdown-menu
+                        ul.nav
+                          li.nav-item.border-bottom.w-100
+                            a.nav-link.text-primary.py-1(href='#') 
+                              i.fas.fa-user-cog.fa-fw
+                              small.pl-1 Update User
+                          li.nav-item.w-100
+                            a.nav-link.text-danger.py-1(href='#') 
+                              i.fas.fa-user-minus.fa-fw 
+                              small.pl-1 Delete User
+        // Pagination
+        .pagination.flex-m.flex-w.p-t-26.justify-content-center
+          each _, i in Array(totalPages)
+            if (parseInt(i)+1 == currentPage)
+              a.item-pagination.flex-c-m.trans-0-4.active-pagination(href="/products?view=table&page="+(parseInt(i)+1)) #{i+1}
+            else
+              a.item-pagination.flex-c-m.trans-0-4(href="/products?view=table&page="+(parseInt(i)+1)) #{i+1}
+
+block scripts
+  if (message)
+    script(type="text/javascript").
+        swal("Success", "#{message}", "success");
+
+  // ===============================================================================================
+  script(src="/js/products.js")
+  // ===============================================================================================
+
+  //script(src="/vendor/base/scripts.bundle.js")
+  // ===============================================================================================
+  //script(src="/vendor/datatables/datatables.bundle.js")
+  //script(src="/vendor/datatables/buttons.js")

@@ -1,0 +1,73 @@
+extends layout
+
+block styles
+  link(rel="stylesheet" type="text/css" href="/vendor/datatables/datatables.bundle.css")
+
+block content
+  .container1-page
+    // breadcrumb
+    .container
+      .bread-crumb.bgwhite.flex-w.p-r-15.p-t-30.p-l-15-sm
+        a.s-text16(href="/")
+          | Home
+          i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+        span.s-text17(href="/pages")
+          | Pages
+
+    // Content page
+    section.bgwhite.p-t-55.p-b-65
+      .container
+        .d-flex.justify-content-end
+          if (view == 'grid')
+            a.btn.btn-clear.border-primary.rounded-0(href="/products")
+                i.fa.fa-th.text-danger
+          else
+            a.btn.btn-clear.border.rounded-0(href="/products")
+                i.fa.fa-th
+          if (view == 'table')
+            a.btn.btn-clear.border-primary.rounded-0.mx-2(href="?view=table")
+              i.fa.fa-list.text-danger
+          else
+            a.btn.btn-clear.border.rounded-0.mx-2(href="?view=table")
+              i.fa.fa-list
+          a.btn.btn-clear.border.rounded-0(href="/pages/add")
+            i.fa.fa-plus.fa-fw
+            small Add Page
+        .flex-sb-m.flex-w.p-b-35
+          .flex-w
+            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
+              select.custom-select.border-0.s-text7.w-100(name="sorting" onchange="filterByCategory(this)")
+                option.text-secondary.s-text7(value="all") Sort by category
+                  each category in categories
+                    option.text-secondary.s-text7(value=category.shortName) #{category.name}
+            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
+              select.custom-select.border-0.s-text7.w-100(name="sorting")
+                option.text-secondary.s-text7 Price
+                option.text-secondary.s-text7 $0.00 - $50.00
+                option.text-secondary.s-text7 $50.00 - $100.00
+                option.text-secondary.s-text7 $100.00 - $150.00
+                option.text-secondary.s-text7 $150.00 - $200.00
+                option.text-secondary.s-text7 $200.00+
+            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
+              input.form-control.border-0.s-text7.w-100(type="search" name="search" placeholder="Search")
+          span.s-text8.p-t-5.p-b-5
+            | Showing 1–#{pages.length < 20 ? pages.length : 20} of #{pages.length} results
+        
+        .row
+          each page in pages
+            .col-sm-10.col-md-8.col-lg-3
+              // block1
+              a.block1.hov-img-zoom.pos-relative.m-b-20.bg-light(href="/pages/"+page._id)
+                .d-flex.align-items-center.justify-content-center.w-100.text-center.p-b-60.pt-5
+                  i(class="fa fa-"+page.icon style="font-size: 100px")
+                .block1-wrapbtn.w-size2
+                  // Button
+                  .flex-c-m.m-text2.text-center.bg3.hov1.trans-0-4
+                    | #{page.name}
+block scripts
+  if (error)
+    script(type="text/javascript").
+        swal("Error", "#{errMsg}", "error");
+  if (message)
+    script(type="text/javascript").
+        swal("#{msgTitle}" ? "#{msgTitle}" : "Success", "#{message}", "success");

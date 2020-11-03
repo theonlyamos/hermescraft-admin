@@ -1,0 +1,65 @@
+hr
+form(action='/pages/update' method="POST" enctype="multipart/form-data").leave-comment
+  input(type="hidden" name="section" value=page.sections[0]._id)
+  input(type="hidden" name="page" value=page._id)
+  input(type="hidden" name="part" value="section")
+  input(type="hidden" name="header" value=page.sections[0].header._id)
+  input(type="hidden" name="image" value=page.sections[0].images[0]._id)
+  input(type="hidden" name="f_paragraph" value=page.sections[0].paragraphs[0]._id)
+  input(type="hidden" name="s_paragraph" value=page.sections[0].paragraphs[1]._id)
+  input(type="hidden" name="span" value=page.sections[0].spans[0]._id)
+  input.d-none(type="file" name="images" id='sectionImageInput' onchange="handleFiles(this)")
+  .row
+    .col-lg-4.p-b-30
+      .hov-img-zoom
+        img(src="/images/"+page.sections[0].images[0].name id="sectionImage" alt="IMG-ABOUT" onclick="$('#sectionImageInput').click()" style="cursor: pointer")
+    .col-lg-8.p-b-30
+      .row
+        .col-10.respon5
+          .of-hidden.m-b-15
+            .flex-m.flex-w.p-b-10
+              .s-text15.w-100
+                b Header
+              .bo4.of-hidden.w-100(style='height: 45px')
+                input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="header_text" value=page.sections[0].header.data placeholder="Section Header" required="required")
+        .col-2.respon5.px-0
+            .of-hidden.m-b-15
+              .flex-m.flex-w.p-b-10
+                .s-text15.w-100
+                  b Color
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7(type="color" name="header_color" value=page.sections[0].header.color)
+        .col-md-12.respon5
+          .of-hidden.m-b-15
+            .flex-m.flex-w.p-b-10
+              .s-text15.w-100
+                b Paragraph #1
+              .of-hidden.w-100
+                textarea.s-text7.p-l-22.p-r-22.p-t-13.w-100(name="f_paragraph_text"  value=page.sections[0].paragraphs[0].data rows=5)
+                  | #{page.sections[0].paragraphs[0].data}
+        .col-md-12.respon5
+          .of-hidden.m-b-15
+            .flex-m.flex-w.p-b-10
+              .s-text15.w-100
+                b Quote
+              .of-hidden.w-100
+                textarea.s-text7.p-l-22.p-r-22.p-t-13.w-100(name="s_paragraph_text"  value=page.sections[0].paragraphs[1].data rows=3)
+                  | #{page.sections[0].paragraphs[1].data}
+        .col-10.respon5
+          .of-hidden.m-b-15
+            .flex-m.flex-w.p-b-10
+              .s-text15.w-100
+                b Quote Author
+              .bo4.of-hidden.w-100(style='height: 45px')
+                input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="span_text" value=page.sections[0].spans[0].data placeholder="Quote Author" required="required")
+        .col-2.respon5.px-0
+            .of-hidden.m-b-15
+              .flex-m.flex-w.p-b-10
+                .s-text15.w-100
+                  b Color
+                .bo4.of-hidden.w-100(style='height: 45px')
+                  input.sizefull.s-text7(type="color" name="span_color" value=page.sections[0].spans[0].color)
+        .col-12.d-flex.justify-content-end
+          // Button
+          button(type="submit").btn.btn-lg.btn-dark.px-5.rounded-pill.flex-c-m.bo-rad-23.hov0.m-text3.trans-0-4
+            | Update

@@ -1,0 +1,101 @@
+extends layout
+
+block content
+  .container1-page
+    // Content page
+    section.bgwhite.p-b-65
+      .container
+        .d-flex
+          // breadcrumb
+          .bread-crumb.bgwhite.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
+            a.s-text16(href="/")
+              | Home
+              i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+            a.s-text16(href="/pages")
+              | Pages
+              i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+            span.s-text17
+              | Add Page
+
+        // Page
+        .flex-w.flex-sb
+          form(action='/pages/add' method="POST" enctype="multipart/form-data").leave-comment
+            h4.m-text26.p-t-36.p-b-15
+              | Page Details
+            .row
+              .col-md-6.p-t-30.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Name
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="name" placeholder="Page Name" required="required")
+              .col-md-6.p-t-30.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Title
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="title" placeholder="Page Title" required="required")
+              .col-md-6.p-t-30.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Path
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="path" placeholder="Page url. E.g: /about" required="required")
+              .col-md-6.p-t-30.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Icon
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="icon" placeholder="Page Icon (Fontawesome Icon)" required="required")
+              .col-md-6.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Meta Description
+                    .of-hidden.w-100
+                      textarea.s-text7.p-l-22.p-r-22.p-t-13.w-100(name="description" rows=3 placeholder="Description of the page. This is used by search engines for indexing sites")
+              .col-md-6.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Meta Keywords
+                    .of-hidden.w-100
+                      textarea.s-text7.p-l-22.p-r-22.p-t-13.w-100(name="keywords" rows=3 placeholder="Keywords separated by comma. E.g: phone, huawei, android, smartphone")
+              .col-md-6.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Header
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="header" placeholder="Page Header" required="required")
+              .col-md-6.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Sub-Header
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="subheader" placeholder="Page Sub-Header (Optional)")
+              .col-12.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Banner
+                    .of-hidden.w-100
+                      img#pageBanner(src=hermescraftUrl+"images/heading-pages-06.jpg" style="width: 100%; max-height: 239px; object-fit: contain; cursor: pointer" onclick="$('#pageBannerInput').click()")
+                input.d-none(type="file" name="banner" id='pageBannerInput' onchange="handleFiles(this)")
+              .col-md-6.respon5
+              .col-md-6.d-flex.justify-content-end
+                // Button
+                button(type="submit").btn.btn-lg.px-5.rounded-pill.flex-c-m.bg1.bo-rad-23.hov1.m-text3.trans-0-4
+                  | Save
+
+block scripts
+  if (error)
+    script(type="text/javascript").
+        swal("Error", "#{errMsg}", "error");
+  // ===============================================================================================
+  script(src="/js/image-preview.js")

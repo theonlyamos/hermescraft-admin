@@ -1,0 +1,98 @@
+extends layout
+
+block content
+  .container1-page
+    // Content page
+    section.bgwhite.p-b-65
+      .container
+        .d-flex
+          // breadcrumb
+          .bread-crumb.bgwhite.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
+            a.s-text16(href="/")
+              | Home
+              i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+            a.s-text16(href="/products")
+              | Products
+              i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+            span.s-text17
+              | Add Product
+
+        // Product
+        .flex-w.flex-sb
+          .w-size13.p-t-30.respon5
+            .wrap-slick3.flex-sb.flex-w
+              .wrap-slick3-dots
+              .slick3
+                .item-slick3(data-thumb=hermescraftUrl+"images/thumb-item-01.jpg"  onclick="$('#image3').click()")
+                  .wrap-pic-w(style='cursor: pointer')
+                    img(src=hermescraftUrl+"images/product-detail-01.jpg" alt="IMG-PRODUCT")
+                .item-slick3(data-thumb=hermescraftUrl+"images/thumb-item-01.jpg"  onclick="$('#image2').click()")
+                  .wrap-pic-w(style='cursor: pointer')
+                    img(src=hermescraftUrl+"images/product-detail-02.jpg" alt="IMG-PRODUCT")
+                .item-slick3(data-thumb=hermescraftUrl+"images/thumb-item-01.jpg" onclick="$('#image1').click()")
+                  .wrap-pic-w(style='cursor: pointer')
+                    img(src=hermescraftUrl+"images/product-detail-03.jpg" alt="IMG-PRODUCT")
+          .w-size14.p-t-30.respon5
+            form(action='/products/add' method="POST" enctype="multipart/form-data").leave-comment
+              h4.m-text26.p-b-36.p-t-15
+                | Product Details
+              .of-hidden.size15.m-b-20
+                .flex-m.flex-w.p-b-10
+                  .s-text15.w-size15
+                    | Name
+                  .bo4.of-hidden.w-size16(style='height: 45px')
+                    input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="name" placeholder="Product Name" required="required")
+              .of-hidden.size15.m-b-20
+                .flex-m.flex-w.p-b-10
+                  .s-text15.w-size15
+                    | Category
+                  .bo4.of-hidden.w-size16
+                    select.custom-select.border-0.s-text7.w-100(name="category" required="required")
+                      option.text-secondary.s-text7(value="") Choose an option
+                      each category in categories
+                        option.text-secondary.s-text7(value=category.shortName) #{category.name}
+              .of-hidden.size15.m-b-20
+                .flex-m.flex-2.p-b-10
+                  .s-text15.w-size15
+                    | Brand
+                  .bo4.of-hidden.w-size16(style='height: 45px')
+                    input.sizefull.s-text7.p-l-22(type="text" name="brand" placeholder="Product Brand")
+              .of-hidden.size15.m-b-20
+                .flex-m.flex-w.p-b-10
+                  .s-text15.w-size15
+                    | Size
+                  .bo4.of-hidden.w-size16
+                    select.custom-select.border-0.s-text7.w-100(name="size")
+                      option.text-secondary.s-text7(value="") Choose an option
+                      option.text-secondary.s-text7(value="s") Size S
+                      option.text-secondary.s-text7(value="m") Size M
+                      option.text-secondary.s-text7(value="l") Size L
+                      option.text-secondary.s-text7(value="xl") Size XL
+              .of-hidden.size15.m-b-20
+                .flex-m.flex-w.p-b-10
+                  .s-text15.w-size15
+                    | Color
+                  .bo4.of-hidden.w-size16(style='height: 45px')
+                    input.sizefull.s-text7(type="color" name="color")
+              textarea.dis-block.s-text7.size20.bo4.p-l-22.p-r-22.p-t-13.m-b-20(name="description" placeholder="Description" required="required")
+              .of-hidden.size15.m-b-20
+                .flex-m.flex-w.p-b-10
+                  .s-text15.w-size15
+                    | Price
+                  .bo4.of-hidden.w-size16(style='height: 45px')
+                    input.sizefull.s-text7.p-l-22.p-r-22(type="number" name="price" inputmode="numeric" step=0.01 placeholder="0.00" required="required")
+              input.d-none(type="file" name="images" id='image1' onchange="handleFiles(this, 'slick-slide02')")
+              input.d-none(type="file" name="images" id='image2' onchange="handleFiles(this, 'slick-slide01')")
+              input.d-none(type="file" name="images" id='image3' onchange="handleFiles(this, 'slick-slide00')")
+              .w-100.flex-m.justify-content-end
+                // Button
+                button(type="submit").flex-c-m.size2.bg1.bo-rad-23.hov1.m-text3.trans-0-4
+                  | Submit
+
+
+block scripts
+  if (error)
+    script(type="text/javascript").
+        swal("Error", "#{errMsg}", "error");
+  // ===============================================================================================
+  script(src="/js/image-preview.js")

@@ -1,0 +1,116 @@
+extends layout
+
+block content
+  .container1-page
+    // Content page
+    section.bgwhite.p-b-65
+      .container
+        .d-flex
+          // breadcrumb
+          .bread-crumb.bgwhite.flex-w.p-r-15.p-t-30.p-l-15-sm
+            a.s-text16(href="/")
+              | Home
+              i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+            a.s-text16(href="/pages")
+              | Pages
+              i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+            span.s-text17
+              | #{page.name}
+
+        // Page
+        .flex-w.flex-sb
+          form(action='/pages/update' method="POST" enctype="multipart/form-data").leave-comment
+            input(type="hidden" name="pageId" value=page._id)
+            h4.m-text26.p-t-36.p-b-15
+              | Page Details
+            .row
+              .col-md-6.p-t-30.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Name
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="name" value=page.name placeholder="Page Name" required="required")
+              .col-md-6.p-t-30.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Title
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="title" value=page.title placeholder="Page Title" required="required")
+              .col-md-6.p-t-30.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Path
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="path" value=page.path placeholder="Page url. E.g: /about" required="required")
+              .col-md-6.p-t-30.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Icon
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="icon" value=page.icon placeholder="Page Icon (Fontawesome Icon)" required="required")
+              .col-md-6.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Meta Description
+                    .of-hidden.w-100
+                      textarea.s-text7.p-l-22.p-r-22.p-t-13.w-100(name="description"  value=page.description rows=3 placeholder="Description of the page. This is used by search engines for indexing sites")
+                        | #{page.description}
+              .col-md-6.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Meta Keywords
+                    .of-hidden.w-100
+                      textarea.s-text7.p-l-22.p-r-22.p-t-13.w-100(name="keywords"  value=page.keywords rows=3 placeholder="Keywords separated by comma. E.g: phone, huawei, android, smartphone")
+                        | #{page.keywords}
+              .col-md-6.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Header
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="header" value=page.header placeholder="Page Header" required="required")
+              .col-md-6.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Sub-Header
+                    .bo4.of-hidden.w-100(style='height: 45px')
+                      input.sizefull.s-text7.p-l-22.p-r-22(type="text" name="subheader" value=page.subheader placeholder="Page Sub-Header (Optional)")
+              .col-12.respon5
+                .of-hidden.m-b-20
+                  .flex-m.flex-w.p-b-10
+                    .s-text15.w-100
+                      | Banner
+                    .block2
+                      .block2-img.wrap-pic-w.of-hidden.pos-relative
+                        if (page.banner)
+                          img#pageBanner(src=hermescraftUrl+"images/"+page.banner.name style="width: 100%; max-height: 239px; object-fit: contain; cursor: pointer" onclick="$('#pageBannerInput').click()")
+                        else
+                          img#pageBanner(src=hermescraftUrl+"images/heading-pages-06.jpg" style="width: 100%; max-height: 239px; object-fit: contain; cursor: pointer" onclick="$('#pageBannerInput').click()")
+                          .block2-overlay.banner.trans-0-4.d-flex.flex-column.align-items-end.pr-1(onclick="$('#pageBannerInput').click()")
+                input.d-none(type="file" name="banner" id='pageBannerInput' onchange="handleFiles(this)")
+              .col-md-6.respon5
+              .col-md-6.d-flex.justify-content-end
+                // Button
+                button(type="submit").btn.btn-lg.btn-primary.px-5.rounded-pill.flex-c-m.bo-rad-23.hov1.m-text3.trans-0-4
+                  | Update
+
+        // Sections
+        if (page.name == 'About')
+          include includes/about.pug
+        if (page.name == 'Home')
+          include includes/home.pug
+block scripts
+  if (error)
+    script(type="text/javascript").
+        swal("Error", "#{errMsg}", "error");
+  if (message)
+    script(type="text/javascript").
+        swal("#{msgTitle}" ? "#{msgTitle}" : "Success", "#{message}", "success");
+  script(src="/js/image-preview.js")
