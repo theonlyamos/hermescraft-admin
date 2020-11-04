@@ -14,11 +14,11 @@ router.
 route('/').
 get(async function(req, res, next) {
   const categories = await Category.find({}).populate('image')
-                                  .exec().catch((error)=>console.log(error))
+                                  .exec()
   for (let i = 0; i < categories.length; i++){
     const category = categories[i]
     const link = await PageLink.findById(category.link).populate('text')
-                                .exec().catch((error)=>console.log(error))
+                                .exec()
     category.link = link
     categories[i] = category
   }
@@ -42,11 +42,11 @@ router.
 route('/add').
 get(async(req, res, next)=>{
   const categories = await Category.find({}).populate('image')
-                                  .exec().catch((error)=>console.log(error))
+                                  .exec()
   for (let i = 0; i < categories.length; i++){
     const category = categories[i]
     const link = await PageLink.findById(category.link).populate('text')
-                                .exec().catch((error)=>console.log(error))
+                                .exec()
     category.link = link
     categories[i] = category
   }
@@ -62,11 +62,11 @@ post(async(req, res, next)=>{
       if (err){
         console.log(err)
         const categories = await Category.find({}).populate('image')
-                                  .exec().catch((error)=>console.log(error))
+                                  .exec()
         for (let i = 0; i < categories.length; i++){
           const category = categories[i]
           const link = await PageLink.findById(category.link).populate('text')
-                                      .exec().catch((error)=>console.log(error))
+                                      .exec()
           category.link = link
           categories[i] = category
         }
@@ -100,7 +100,7 @@ router.
 route('/update').
 post(async(req, res, next)=>{
   if (req.body.part){
-    const page = await Page.findById(req.body.page).catch((error)=>console.log(error))
+    const page = await Page.findById(req.body.page)
     
     // Home Page Update
     if (page.name == 'Home'){
@@ -108,21 +108,21 @@ post(async(req, res, next)=>{
         const header = await PageText.findByIdAndUpdate(req.body.header, {
           data: req.body.header_text,
           color: req.body.header_color
-        }).catch((error)=>console.log(error))
+        })
 
         const description = await PageText.findByIdAndUpdate(req.body.description, {
           data: req.body.description_text,
           color: req.body.description_color
-        }).catch((error)=>console.log(error))
+        })
 
         const linkText = await PageText.findByIdAndUpdate(req.body.link_text, {
           data: req.body.link_text_data,
           color: req.body.link_text_color
-        }).catch((error)=>console.log(error))
+        })
 
         const link = await PageLink.findByIdAndUpdate(req.body.link, {
           path: req.body.link_path
-        }).catch((error)=>console.log(error))
+        })
 
         let background;
         if (req.files){
@@ -149,15 +149,15 @@ post(async(req, res, next)=>{
         const linkText = await PageText.findByIdAndUpdate(req.body.link_text_id, {
           data: req.body.link_text,
           color: req.body.link_color
-        }).catch((error)=>console.log(error))
+        })
 
         const link = await PageLink.findByIdAndUpdate(req.body.link, {
           path: req.body.link_path
-        }).catch((error)=>console.log(error))
+        })
 
         const category = await Category.findByIdAndUpdate(req.body.category, {
           name: req.body.name
-        }).catch((error)=>console.log(error))
+        })
 
         if (req.files){
           let image = req.files.image
@@ -267,20 +267,20 @@ post(async(req, res, next)=>{
       const header = await PageText.findByIdAndUpdate(req.body.header, {
         data: req.body.header_text,
         color: req.body.header_color
-      }).catch((error)=>console.log(error))
+      })
 
       const fParagraph = await PageText.findByIdAndUpdate(req.body.f_paragraph, {
         data: req.body.f_paragraph_text
-      }).catch((error)=>console.log(error))
+      })
 
       const sParagraph = await PageText.findByIdAndUpdate(req.body.s_paragraph, {
         data: req.body.s_paragraph_text
-      }).catch((error)=>console.log(error))
+      })
 
       const span = await PageText.findByIdAndUpdate(req.body.span, {
         data: req.body.span_text,
         color: req.body.span_color
-      }).catch((error)=>console.log(error))
+      })
 
       if (req.files){
         const image = req.files.images
@@ -311,11 +311,11 @@ post(async(req, res, next)=>{
       if (err){
         console.log(err)
         const categories = await Category.find({}).populate('image')
-                                  .exec().catch((error)=>console.log(error))
+                                  .exec()
         for (let i = 0; i < categories.length; i++){
           const category = categories[i]
           const link = await PageLink.findById(category.link).populate('text')
-                                      .exec().catch((error)=>console.log(error))
+                                      .exec()
           category.link = link
           categories[i] = category
         }
@@ -351,18 +351,18 @@ route('/:pageId')
 .get(async(req, res, next)=>{
   const pageId = req.params.pageId
   let page = await Page.findById(pageId).populate('banner')
-                        .exec().catch((error)=>console.log(error)); 
+                        .exec(); 
   for (let i = 0; i < page.sections.length; i++){
     let section = await PageSection.findById(page.sections[i])
                                     .populate('header').populate('paragraphs')
                                     .populate('spans').populate('images')
                                     .populate('background')
-                                    .exec().catch((error)=>console.log(error)); 
+                                    .exec(); 
 
     let links = []
     for (let t = 0; t < section.links.length; t++){
       let link = await PageLink.findById(section.links[t]).populate('text')
-                                .exec().catch((error)=>console.log(error))
+                                .exec()
       links.push(link)
     }
 
@@ -375,18 +375,18 @@ route('/:pageId')
     for (let i = 0; i < page.carousel.length; i++){
       let carousel = await PageCarouselItem.findById(page.carousel[i]).populate('header')
                                             .populate('description').populate('background')
-                                            .exec().catch((error)=>console.log(error))
+                                            .exec()
       
-      carousel.link = await PageLink.findById(carousel.link).populate('text').exec().catch((error)=>console.log(error))
+      carousel.link = await PageLink.findById(carousel.link).populate('text').exec()
       page.carousel[i] = carousel
     }
   }
   const categories = await Category.find({}).populate('image')
-                                  .exec().catch((error)=>console.log(error))
+                                  .exec()
   for (let i = 0; i < categories.length; i++){
     const category = categories[i]
     const link = await PageLink.findById(category.link).populate('text')
-                                .exec().catch((error)=>console.log(error))
+                                .exec()
     category.link = link
     categories[i] = category
   }
