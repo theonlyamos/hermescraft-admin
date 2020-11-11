@@ -15,7 +15,7 @@ router
 .get(async(req, res, next)=>{
   try {
     let page = req.query.page ? req.query.page : 1
-    const result = await User.paginate({}, {page: page, limit: 10})
+    const result = await User.paginate({role: "customer"}, {page: page, limit: 10})
     const customers = result.docs
 
     for (let i = 0; i < customers.length; i++){
