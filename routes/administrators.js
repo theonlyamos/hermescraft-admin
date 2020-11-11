@@ -36,7 +36,8 @@ router
     res.render('administrators', { title: 'HermesCraft || Administrators',
                           hermescraftUrl, message, administrators,
                           msgTitle, error, errMsg, totalDocs,
-													pagingCounter, totalPages, limit, currentPage
+													pagingCounter, totalPages, limit, currentPage,
+                          user: req.user
 
     })
   }
