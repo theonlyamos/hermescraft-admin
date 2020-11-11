@@ -37,7 +37,8 @@ get(async function(req, res, next) {
                         hermescraftUrl, hermescraftAdminUrl,
                         ordersCount, latestOrders,
                         ordersTotal, customersCount,
-                        newCustomers, productsCount
+                        newCustomers, productsCount,
+                        user: req.user
   });
 });
 
