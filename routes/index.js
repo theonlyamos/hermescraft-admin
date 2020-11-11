@@ -23,7 +23,7 @@ get(async function(req, res, next) {
   }
   const products = await Product.find({}).populate('images').limit(8).exec();
   const ordersAggregate = await Order.aggregate([{$group: {_id: null, ordersTotal: {$sum: "$total"}}}])
-  const { ordersTotal } = ordersAggregate[0]
+  const ordersTotal = ordersAggregate.length ? ordersAggregate[0].ordersTotal : 0
   const ordersCount = await Order.countDocuments({})
   let result = await Order.paginate({}, {limit: 15, sort: {createdAt: -1}})
   const latestOrders = result.docs;
