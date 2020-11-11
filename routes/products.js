@@ -15,19 +15,29 @@ router.
 route('/')
 .get(async(req, res, next)=>{
   let view = req.query.view
-  if (!view || view != 'table'){
-    view = 'grid'
+  if (view){
+    req.session.products_view = view
+  }
+  else if (!req.session.products_view) {
+    req.session.products_view = 'grid'
   }
   let result;
   let category = req.query.category
   let page = req.query.page ? req.query.page : 1
-  if (!category || category == 'all'){
-    result = await Product.paginate({}, {page: page, limit: 10,  populate: 'images'})
+
+  if (req.session.products_view === 'table'){
+    result = await Product.paginate({}, {populate: 'images'})
     //products = await Product.find({}).populate('images').limit(20).exec();
   }
   else {
-    result = await Product.paginate({category: category}, {page: page, limit: 10, populate: 'images'})
-    //products = await Product.find({category: category}).populate('images').limit(20).exec();
+    if (!category || category == 'all'){
+      result = await Product.paginate({}, {page: page, limit: 10, populate: 'images'})
+      //products = await Product.find({}).populate('images').limit(20).exec();
+    }
+    else {
+      result = await Product.paginate({category: category}, {page: page, limit: 10, populate: 'images'})
+      //products = await Product.find({category: category}).populate('images').limit(20).exec();
+    }
   }
 
   const products = result.docs
@@ -56,7 +66,7 @@ route('/')
                         totalPages,
                         limit,
                         currentPage,
-                        view: view,
+                        view: req.session.products_view,
                         hermescraftUrl,
                         message: message
   });
@@ -124,7 +134,7 @@ post(async(req, res, next)=>{
           height: req.body.height ? req.body.height : '',
           featured: req.body.featured ? req.body.featured : false,
         })
-        const doc = await Product.create(product)
+        let doc = awaitProduct.create(product)
         const stripe_product = await Stripe.products.create({
           name: doc.name,
           images: imagePaths
@@ -170,6 +180,7 @@ post(async(req, res, next)=>{
             height: req.body.height ? req.body.height : '',
             featured: req.body.featured ? req.body.featured : false,
           })
+        
           let doc = await Product.create(product)
           const stripe_product = await Stripe.products.create({
             name: doc.name,

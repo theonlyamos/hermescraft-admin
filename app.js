@@ -7,6 +7,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport = require('passport');
+const { isAdmin } = require('./authorize');
 var config = require('./config');
 var connectEnsureLoggedIn = require('connect-ensure-login');
 
@@ -20,6 +21,7 @@ var PagesRouter = require('./routes/pages');
 var ProductsRouter = require('./routes/products');
 var OrdersRouters = require('./routes/orders');
 var CustomersRouter = require('./routes/customers');
+var AdministratorsRouter = require('./routes/administrators');
 
 var app = express();
 
@@ -34,7 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: config.stripeSecretKey, 
+  secret: config.secretKey, 
   resave: false,
   saveUninitialized: false,
   store: new FileStore()
@@ -56,12 +58,14 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/login', LoginRouter);
 
 app.use(connectEnsureLoggedIn.ensureLoggedIn())
+app.use(isAdmin);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pages', PagesRouter);
 app.use('/products', ProductsRouter);
 app.use('/orders', OrdersRouters);
 app.use('/customers', CustomersRouter);
+app.use('/administrators', AdministratorsRouter);
 
 var connect = mongoose.connect(config.mongoUrI, 
                                 { useNewUrlParser: true,

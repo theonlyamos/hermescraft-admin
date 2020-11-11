@@ -4,84 +4,88 @@ block styles
   link(rel="stylesheet" type="text/css" href="/vendor/datatables/datatables.bundle.css")
 
 block content
-  .container1-page
+  .container1-page.bg-light
     // breadcrumb
-    .bread-crumb.bgwhite.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
-      a.s-text16(href="/")
-        | Home
+    .bread-crumb.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
+      a.s-text15(href="/")
+        .la.la-home
         i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
-      span.s-text17(href="/orders")
+      span.s-text16
         | Orders
 
     // Content page
-    section.bgwhite.p-t-55.p-b-65
+    section.p-t-55.p-b-65
       .container
-        .flex-sb-m.flex-w.p-b-35
-          .flex-w
-            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
-              select.custom-select.border-0.s-text7.w-100(name="sorting")
-                option.text-secondary.s-text7 Price
-                option.text-secondary.s-text7 $0.00 - $50.00
-                option.text-secondary.s-text7 $50.00 - $100.00
-                option.text-secondary.s-text7 $100.00 - $150.00
-                option.text-secondary.s-text7 $150.00 - $200.00
-                option.text-secondary.s-text7 $200.00+
-            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
-              input.form-control.border-0.s-text7.w-100(type="search" name="search" placeholder="Search")
-          span.s-text8.p-t-5.p-b-5
-            | Showing #{orders.length}–#{orders.length < 12 ? orders.length : 12} of #{totalDocs} results
-        // Orders 
-        .table-responsive
-          table.table.table-striped.table-hover#m_table_1
-            thead.bg-dark
-              tr.s-text15.text-white
-                th 
-                  .custom-control.custom-checkbox
-                      input.input.custom-control-input(type="checkbox" id="all")
-                      label.custom-control-label(for="all")
-                th Email
-                th Date
-                th Items Count
-                th Discount
-                th Tax
-                th Subtotal
-                th Total
-                th.text-center Actions
-            tbody
-              each order in orders
-                tr.s-text15(id=order._id)
-                  td.d-flex.align-items-center(style="height: 80px")
-                    .custom-control.custom-checkbox
-                      input.input.custom-control-input(type="checkbox" id="check_"+order._id)
-                      label.custom-control-label(for="check_"+order._id)
-                  td(style="line-height: 60px") #{order.user.username}
-                  td(style="line-height: 60px") #{new Date(order.createdAt).toUTCString()}
-                  td(style="line-height: 60px") #{order.items_count}
-                  td(style="line-height: 60px") $#{order.discount}
-                  td(style="line-height: 60px") $#{order.tax}
-                  td(style="line-height: 60px") $#{order.subtotal}
-                  td(style="line-height: 60px") $#{order.total}
-                  td.d-flex.justify-content-center.align-items-center(style="height: 80px")
-                    .dropdown
-                      button.btn.btn-outline-secondary.rounded-circle.p-0.d-flex.align-items-center.justify-content-center(data-toggle='dropdown' style="width: 25px; height: 25px" aria-haspopup="true" aria-expanded="false")
-                        i.fas.fa-ellipsis-v
-                      .dropdown-menu
-                        ul.nav
-                          li.nav-item.border-bottom.w-100
-                            a.nav-link.text-primary.py-1(href='#') 
-                              i.fas.fa-file-alt.fa-fw
-                              small View Invoice
-                          li.nav-item.w-100
-                            a.nav-link.text-danger.py-1(href='#') 
-                              i.fas.fa-trash.fa-fw 
-                              small Delete Order
+        .m-portlet.m-portlet--mobile.m-portlet--unair
+          .m-portlet__head
+            .m-portlet__head-caption
+              .m-portlet__head-title
+                h3.m-portlet__head-text
+                  | Orders
+          .m-portlet__body
+            // Orders 
+            table.table.table-striped.table-hover#m_table_1
+              thead.bg-dark
+                tr.s-text15.text-white
+                  th 
+                    label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="all")
+                      input(type="checkbox" id="all")
+                      span
+                  th Email
+                  th Date
+                  th Items Count
+                  th Discount
+                  th Tax
+                  th Subtotal
+                  th Total
+                  th Actions
+              tbody
+                each order in orders
+                  tr.s-text15(id=order._id)
+                    td
+                      label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="check_"+order._id)
+                        input(type="checkbox" id="check_"+order._id)
+                        span
+                    td #{order.user.username}
+                    td #{new Date(order.createdAt).toUTCString()}
+                    td #{order.items_count}
+                    td $#{order.discount}
+                    td $#{order.tax}
+                    td $#{order.subtotal}
+                    td $#{order.total}
+                    td
+                        .m-portlet__head-tools
+                          ul.m-portlet__nav
+                            li.m-portlet__nav-item
+                              .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover' aria-expanded='true')
+                                a.m-portlet__nav-link.btn.btn-lg.btn-secondary.m-btn.m-btn--icon.m-btn--icon-only.m-btn--pill.m-dropdown__toggle(href='#')
+                                  i.la.la-ellipsis-h.m--font-brand
+                                .m-dropdown__wrapper
+                                  span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                                  .m-dropdown__inner
+                                    .m-dropdown__body
+                                      .m-dropdown__content
+                                        ul.m-nav
+                                          li.m-nav__section.m-nav__section--first
+                                            span.m-nav__section-text Quick Actions
+                                          li.m-nav__item
+                                            a.m-nav__link(href=order.receipt_url
+target="_blank")
+                                              i.m-nav__link-icon.flaticon-list-1
+                                              span.m-nav__link-text Receipt
+                                          li.m-nav__item
+                                            a.m-nav__link(href='')
+                                              i.m-nav__link-icon.flaticon-delete
+                                              span.m-nav__link-text Delete
+                    
+            
         // Pagination
-        .pagination.flex-m.flex-w.p-t-26.justify-content-center
-          each _, i in Array(totalPages)
-            if (parseInt(i)+1 == currentPage)
-              a.item-pagination.flex-c-m.trans-0-4.active-pagination(href="/products?view=table&page="+(parseInt(i)+1)) #{i+1}
-            else
-              a.item-pagination.flex-c-m.trans-0-4(href="/products?view=table&page="+(parseInt(i)+1)) #{i+1}
+          .pagination.flex-m.flex-w.p-t-26.justify-content-center
+            each _, i in Array(totalPages)
+              if (parseInt(i)+1 == currentPage)
+                a.item-pagination.flex-c-m.trans-0-4.active-pagination(href="/products?view=table&page="+(parseInt(i)+1)) #{i+1}
+              else
+                a.item-pagination.flex-c-m.trans-0-4(href="/products?view=table&page="+(parseInt(i)+1)) #{i+1}
 
 block scripts
   if (message)
@@ -92,7 +96,6 @@ block scripts
   script(src="/js/products.js")
   // ===============================================================================================
 
-  //script(src="/vendor/base/scripts.bundle.js")
   // ===============================================================================================
-  //script(src="/vendor/datatables/datatables.bundle.js")
-  //script(src="/vendor/datatables/buttons.js")
+  script(src="/vendor/datatables/datatables.bundle.js")
+  script(src="/vendor/datatables/buttons.js")

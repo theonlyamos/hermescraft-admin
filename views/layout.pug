@@ -1,10 +1,13 @@
 doctype html
 html(lang="en")
   head
-    title= title
+    title.text-center= title
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     // ===============================================================================================
+    // begin::Global Theme Styles
+    link(href='/vendor/base/vendors.bundle.css' rel='stylesheet' type='text/css')
+    link(href='/vendor/base/style.bundle.css' rel='stylesheet' type='text/css')
     link(rel="shortcut icon" type="image/x-icon" href="/images/icons/favicon.ico")
     // ===============================================================================================
     link(rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css")
@@ -86,11 +89,11 @@ html(lang="en")
                     i.fas.fa-money-check.pr-2
                     | Coupons 
                 li.p-0.mb-2
-                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/coupons") 
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/administrators") 
                     i.fas.fa-users-cog.pr-2
                     | Administrators 
                 li.p-0.mb-2
-                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/coupons") 
+                  a.btn.btn-outline-dark.border.text-left.pl-3.w-100.rounded-0.py-2(href="/account") 
                     i.fas.fa-user-shield.pr-2
                     | Account 
                 li.p-0.mb-2
@@ -187,8 +190,13 @@ html(lang="en")
     script(type="text/javascript" src="/vendor/lightbox2/js/lightbox.min.js")
     // ===============================================================================================
     script(type="text/javascript" src="/vendor/sweetalert/sweetalert.min.js")
+    script(src="/js/main.js")
+    
+    // begin::Global Theme Bundle
+    script(src='/vendor/base/vendors.bundle.js' type='text/javascript')
+    script(src='/vendor/base/scripts.bundle.js' type='text/javascript')
 
     block scripts
     
     // ===============================================================================================
-    script(src="/js/main.js")
+    

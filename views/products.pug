@@ -4,54 +4,69 @@ block styles
   link(rel="stylesheet" type="text/css" href="/vendor/datatables/datatables.bundle.css")
 
 block content
-  .container1-page
+  // Confirm Delete Modal
+  .modal.fade#confirm_delete_modal(tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalTitle" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered(role="document")
+      .modal-content
+        .modal-header.bg-danger
+          h3.modal-title.text-white#confirmDeleteModalTitle(style="font-weight: 700") Delete Product
+          button.close(type="button" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") &times;
+        .modal-body
+          p Are you sure you want to delete #[b.product_name ]?
+        .modal-footer
+          button.btn.btn-secondary.text-secondary(type="button" data-dismiss="modal") Close
+          button.btn.btn-danger(type="submit") Delete
+  .container1-page.bg-light
     // breadcrumb
-    .bread-crumb.bgwhite.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
-      a.s-text16(href="/")
-        | Home
+    .bread-crumb.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
+      a.s-text15(href="/")
+        .la.la-home
         i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
-      span.s-text17(href="/products")
+      span.s-text16
         | Products
 
     // Content page
-    section.bgwhite.p-t-55.p-b-65
+    section.p-t-55.p-b-65
       .container
         .d-flex.justify-content-end
           if (view == 'grid')
-            a.btn.btn-clear.border-primary.rounded-0(href="/products")
-                i.fa.fa-th.text-danger
+            a.btn.btn-clear.border-primary.rounded-0(href="/products?view=grid")
+                i.flaticon-squares-1.text-danger
           else
-            a.btn.btn-clear.border.rounded-0(href="/products")
-                i.fa.fa-th
+            a.btn.btn-clear.border.rounded-0(href="/products?view=grid")
+                i.flaticon-squares-1
           if (view == 'table')
-            a.btn.btn-clear.border-primary.rounded-0.mx-2(href="?view=table")
-              i.fa.fa-list.text-danger
+            a.btn.btn-clear.border-primary.rounded-0(href="/products?view=table")
+                i.fa.fa-list.text-danger
           else
-            a.btn.btn-clear.border.rounded-0.mx-2(href="?view=table")
+             a.btn.btn-clear.border.rounded-0.mx-2(href="/products?view=table")
               i.fa.fa-list
+            
           a.btn.btn-clear.border.rounded-0(href="/products/add")
-            i.fa.fa-plus.fa-fw
+            i.flaticon-add-circular-button 
             small Add Product
-        .flex-sb-m.flex-w.p-b-35
-          .flex-w
-            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
-              select.custom-select.border-0.s-text7.w-100(name="sorting" onchange="filterByCategory(this)")
-                option.text-secondary.s-text7(value="all") Sort by category
-                option.text-secondary.s-text7(value="all") All
-                  each category in categories
-                    option.text-secondary.s-text7(value=category.shortName) #{category.name}
-            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
-              select.custom-select.border-0.s-text7.w-100(name="sorting")
-                option.text-secondary.s-text7 Price
-                option.text-secondary.s-text7 $0.00 - $50.00
-                option.text-secondary.s-text7 $50.00 - $100.00
-                option.text-secondary.s-text7 $100.00 - $150.00
-                option.text-secondary.s-text7 $150.00 - $200.00
-                option.text-secondary.s-text7 $200.00+
-            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
-              input.form-control.border-0.s-text7.w-100(type="search" name="search" placeholder="Search")
-          span.s-text8.p-t-5.p-b-5
-            | Showing #{products.length}–#{products.length < 12 ? products.length : 12} of #{totalDocs} results
+        if (view == 'grid')
+          .flex-sb-m.flex-w.p-b-35
+            .flex-w
+              .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
+                select.custom-select.border-0.s-text7.w-100(name="sorting" onchange="filterByCategory(this)")
+                  option.text-secondary.s-text7(value="all") Sort by category
+                  option.text-secondary.s-text7(value="all") All
+                    each category in categories
+                      option.text-secondary.s-text7(value=category.shortName) #{category.name}
+              .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
+                select.custom-select.border-0.s-text7.w-100(name="sorting")
+                  option.text-secondary.s-text7 Price
+                  option.text-secondary.s-text7 $0.00 - $50.00
+                  option.text-secondary.s-text7 $50.00 - $100.00
+                  option.text-secondary.s-text7 $100.00 - $150.00
+                  option.text-secondary.s-text7 $150.00 - $200.00
+                  option.text-secondary.s-text7 $200.00+
+              .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
+                input.form-control.border-0.s-text7.w-100(type="search" name="search" placeholder="Search")
+            span.s-text8.p-t-5.p-b-5
+              | Showing #{products.length}–#{products.length < 12 ? products.length : 12} of #{totalDocs} results
         // Product
         if (view == 'grid')
           .row
@@ -62,17 +77,17 @@ block content
                   .block2-img.wrap-pic-w.of-hidden.pos-relative
                     img(src=hermescraftUrl+"images/products/"+product.images[0].name alt=product.name)
                     .block2-overlay.trans-0-4.d-flex.flex-column.align-items-end.pr-1(style='cursor: pointer' onclick="window.location.href='/products/"+product._id+"'")
-                      a.block2-btn-delete.hov-pointer.trans-0-4.mt-2(href="/products/delete/"+product._id role="button" title="Delete")
-                        i.fa.fa-trash.fa-2x.text-danger.pr-1(aria-hidden="true")
-                        i.fa.fa-trash.fa-2x.text-danger.dis-none(aria-hidden="true")
+                      .btn.btn-clear.block2-btn-delete.hov-pointer.trans-0-4.mt-2(data-target="#confirm_delete_modal" data-toggle="modal" data-product=product.name data-url="/products/delete/"+product._id)
+                        i.fas.fa-trash-alt.fa-2x.text-danger(aria-hidden="true")
+                        i.fas.fa-trash-alt.fa-2x.text-danger.dis-none(aria-hidden="true")
                       
                       a.block2-btn-update.hov-pointer.trans-0-4.mt-2(href="/products/"+product._id role="button" title="Update")
                         i.fa.fa-edit.fa-2x.text-primary(aria-hidden="true")
                         i.fa.fa-edit.fa-2x.text-primary.dis-none(aria-hidden="true")
                       
-                      a.block2-btn-view.hov-pointer.trans-0-4.mt-2(href="/products/delete/"+product._id role="button" title="View")
-                        i.fa.fa-external-link.fa-2x.text-light(aria-hidden="true")
-                        i.fa.fa-external-link.fa-2x.text-light.dis-none(aria-hidden="true")
+                      a.block2-btn-view.hov-pointer.trans-0-4.mt-2(href=hermescraftUrl+"shop/product/"+product._id role="button" title="View" target="_blank")
+                        i.fa.fa-external-link-alt.fa-2x.text-light.pr-1(aria-hidden="true")
+                        i.fa.fa-external-link-alt.fa-2x.text-light.dis-none(aria-hidden="true")
                       //
                         .block2-btn-addcart.w-size1.trans-0-4
                           // Button
@@ -92,70 +107,88 @@ block content
                 a.item-pagination.flex-c-m.trans-0-4(href="/products?page="+(parseInt(i)+1)) #{i+1}
         
         else 
-          .table-responsive
-            table.table.table-striped.table-hover#m_table_1
-              thead.bg-dark
-                tr.s-text15.text-white
-                  th Image
-                  th Name
-                  th Category
-                  th Description
-                  th Price
-                  th Actions
-              tbody
-                each product in products
-                  tr.s-text15
-                    td
-                      img(src=hermescraftUrl+"images/products/"+product.images[0].name alt=product.name style="width: 50px; height: auto; object-fit: cover")
-                    td(style="line-height: 60px") #{product.name}
-                    td(style="line-height: 60px") #{product.category}
-                    td(style="line-height: 60px") #{product.description}
-                    td(style="line-height: 60px") $#{product.price}
-                    td.d-flex.justify-content-center.align-items-center(style="height: 80px")
-                      .dropdown
-                        button.btn.btn-outline-secondary.rounded-circle.p-0.d-flex.align-items-center.justify-content-center(data-toggle='dropdown' style="width: 25px; height: 25px" aria-haspopup="true" aria-expanded="false")
-                          i.fas.fa-ellipsis-v
-                        .dropdown-menu.dropdown-menu-left
-                          ul.nav
-                            li.nav-item.border-bottom.w-100
-                              a.nav-link.text-primary.py-1(href="/products/"+product._id) 
-                                i.fas.fa-edit.fa-fw
-                                small Update Product
-                            li.nav-item.w-100
-                              a.nav-link.text-danger.py-1(href="/products/delete/"+product._id) 
-                                i.fas.fa-trash.fa-fw 
-                                small Delete Product
-          // Pagination
-          .pagination.flex-m.flex-w.p-t-26.justify-content-center
-            each _, i in Array(totalPages)
-              if (parseInt(i)+1 == currentPage)
-                a.item-pagination.flex-c-m.trans-0-4.active-pagination(href="/products?view=table&page="+(parseInt(i)+1)) #{i+1}
-              else
-                a.item-pagination.flex-c-m.trans-0-4(href="/products?view=table&page="+(parseInt(i)+1)) #{i+1}
-
+          .m-portlet.m-portlet--mobile.m-portlet--unair
+            .m-portlet__head
+              .m-portlet__head-caption
+                .m-portlet__head-title
+                  h3.m-portlet__head-text
+                    | Products
+            .m-portlet__body
+              table.table.table-striped.table-hover#m_table_1
+                thead.bg-dark
+                  tr.s-text15.text-white
+                    th 
+                      label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="all")
+                        input(type="checkbox" id="all")
+                        span
+                    th Image
+                    th Name
+                    th Category
+                    th Description
+                    th Price
+                    th Actions
+                tbody
+                  each product in products
+                    tr.s-text15
+                      td
+                        label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="check_"+product._id)
+                          input(type="checkbox" id="check_"+product._id)
+                          span
+                      td
+                        img(src=hermescraftUrl+"images/products/"+product.images[0].name alt=product.name style="width: 50px; height: auto; object-fit: cover")
+                      td #{product.name}
+                      td #{product.category}
+                      td #{product.description}
+                      td $#{product.price}
+                      td
+                        .m-portlet__head-tools
+                          ul.m-portlet__nav
+                            li.m-portlet__nav-item
+                              .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover' aria-expanded='true')
+                                a.m-portlet__nav-link.btn.btn-lg.btn-secondary.m-btn.m-btn--icon.m-btn--icon-only.m-btn--pill.m-dropdown__toggle(href='#')
+                                  i.la.la-ellipsis-h.m--font-brand
+                                .m-dropdown__wrapper
+                                  span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                                  .m-dropdown__inner
+                                    .m-dropdown__body
+                                      .m-dropdown__content
+                                        ul.m-nav
+                                          li.m-nav__section.m-nav__section--first
+                                            span.m-nav__section-text Quick Actions
+                                          li.m-nav__item
+                                            a.m-nav__link(href="/products/"+product._id)
+                                              i.m-nav__link-icon.flaticon-edit
+                                              span.m-nav__link-text Update Product
+                                          li.m-nav__item
+                                            a.m-nav__link(href="#confirm_delete_modal" data-toggle="modal" data-product=product.name data-url="/products/delete/"+product._id)
+                                              i.m-nav__link-icon.flaticon-delete
+                                              span.m-nav__link-text Delete Product
+                
 block scripts
   if (message)
     script(type="text/javascript").
         swal("Success", "#{message}", "success");
   script(type="text/javascript").
-      $('.block2-btn-addcart').each(function(){
-      var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-      $(this).on('click', function(e){
-        e.stopPropagation();
-      swal(nameProduct, "is added to cart !", "success");
-      });
-      });
-      $('.block2-btn-delete').each(function(){
-      var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-      $(this).on('click', function(e){
+      $('.block2-btn-delete').on('click', function(e){
+        const button = $(this)
+        let product = $(button).data('product');
+        const url = $(button).data('url');
+        if (!product){
+            product = "the selected item(s)"
+        }
+        $("#confirm_delete_modal").modal("show")
+        const modal = $("#confirm_delete_modal");
+        modal.find('.product_name').html(product);
+        modal.find(".modal-footer button[type='submit']").attr('onclick', `window.location.href='${url}'`)
         e.stopPropagation()
       });
+      $('.block2-btn-view').on('click', function(e){
+        e.stopPropagation()
       });
   // ===============================================================================================
   script(src="/js/products.js")
   // ===============================================================================================
 
-  //script(src="/vendor/base/scripts.bundle.js")
   // ===============================================================================================
-  //script(src="/vendor/datatables/datatables.bundle.js")
-  //script(src="/vendor/datatables/buttons.js")
+  script(src="/vendor/datatables/datatables.bundle.js")
+  script(src="/vendor/datatables/buttons.js")

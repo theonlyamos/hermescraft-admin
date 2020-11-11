@@ -112,4 +112,72 @@ router
   res.json({ id: session.id });
 });
 
+router
+.route('/latest')
+.get(async(req, res, next)=>{
+  try{
+    const result = await Order.paginate({})
+		let data = result.docs
+    for (let order of data){
+      console.log(order)
+    }
+  	const total = result.totalDocs
+  	const pagingCounter = result.pagingCounter
+  	const pages = result.totalPages
+  	const perpage = result.limit
+  	const page = result.page
+		const field = "updatedAt"
+		const sort = "desc"
+    res.json({
+			meta: {page, pages, perpage, total, sort, field},
+			data: data
+		})
+
+  }
+  catch(error){
+    console.log(error)
+    res.json(error)
+  }
+})
+.post(async(req, res, next)=>{
+  try {
+    const result = await Order.paginate({}, {sort: {updatedAt: -1}})
+		let data = result.docs 
+    for (let i = 0; i < data.length; i++){
+      data[i].orderID = `${data[i].orderID}-${data[i].shipping.address.country}`
+      data[i].total = parseFloat(data[i].total).toFixed(2)
+    }
+
+  	const total = result.totalDocs
+  	const pagingCounter = result.pagingCounter
+  	const pages = result.totalPages
+  	const perpage = result.limit
+  	const page = result.page
+		const field = "updatedAt"
+		const sort = "desc"
+    return res.json({
+			meta: {page, pages, perpage, total, sort, field},
+			data: data
+		})
+  }
+  catch(error){
+    console.log(error)
+		return res.json(error)
+  }
+})
+
+router
+.route('/:orderid')
+.get(async(req, res, next)=>{
+  try {
+    const orderId = req.params.orderid
+    const order = await Order.findById(orderId).populate('user')
+    res.json(order)
+  }
+  catch(error){
+    res.json(error)
+  }
+})
+
+
 module.exports = router;

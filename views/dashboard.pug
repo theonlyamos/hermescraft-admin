@@ -1,0 +1,1776 @@
+extends layout
+
+block content
+  .container1-page.bg-light
+    // Content page
+    section.p-t-55.p-b-65
+      .container
+        .m-grid__item.m-grid__item--fluid.m-wrapper
+          // BEGIN: Subheader
+          .m-subheader.mb-5
+            .d-flex.align-items-center
+              .mr-auto
+                h3.m-subheader__title Dashboard
+              div
+                span#m_dashboard_daterangepicker.m-subheader__daterange.rounded-0
+                  span.m-subheader__daterange-label
+                    span.m-subheader__daterange-title
+                    span.m-subheader__daterange-date.m--font-brand
+                  a.btn.btn-sm.btn-primary.m-btn.m-btn--icon.m-btn--icon-only.m-btn--custom.m-btn--square(href='#')
+                    i.la.la-angle-down
+          // END: Subheader
+          .m-content
+            // Begin::Section
+            .row
+              .col-xl-4
+                // begin:: Widgets/Top Products
+                .m-portlet.m-portlet--bordered-semi.m-portlet--full-height
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          | Trends
+                    .m-portlet__head-tools
+                      ul.m-portlet__nav
+                        li.m-portlet__nav-item.m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover' aria-expanded='true')
+                          a.m-portlet__nav-link.m-dropdown__toggle.dropdown-toggle.btn.btn--sm.m-btn--pill.btn-secondary.m-btn.m-btn--label-brand(href='#')
+                            | All
+                          .m-dropdown__wrapper
+                            span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust(style='left: auto; right: 36.5px;')
+                            .m-dropdown__inner
+                              .m-dropdown__body
+                                .m-dropdown__content
+                                  ul.m-nav
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-share
+                                        span.m-nav__link-text Activity
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-chat-1
+                                        span.m-nav__link-text Messages
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-info
+                                        span.m-nav__link-text FAQ
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text Support
+                  .m-portlet__body
+                    // begin::Widget5
+                    .m-widget4
+                      .m-widget4__chart.m-portlet-fit--sides.m--margin-top-10.m--margin-top-20(style='height:260px;')
+                        canvas#m_chart_trends_stats
+                      .m-widget4__item
+                        .m-widget4__img.m-widget4__img--logo
+                          img(src='assets/app/media/img/client-logos/logo3.png' alt='')
+                        .m-widget4__info
+                          span.m-widget4__title
+                            | Phyton
+                          br
+                          span.m-widget4__sub
+                            | A Programming Language
+                        span.m-widget4__ext
+                          span.m-widget4__number.m--font-danger +$17
+                      .m-widget4__item
+                        .m-widget4__img.m-widget4__img--logo
+                          img(src='assets/app/media/img/client-logos/logo1.png' alt='')
+                        .m-widget4__info
+                          span.m-widget4__title
+                            | FlyThemes
+                          br
+                          span.m-widget4__sub
+                            | A Let&apos;s Fly Fast Again Language
+                        span.m-widget4__ext
+                          span.m-widget4__number.m--font-danger +$300
+                      .m-widget4__item
+                        .m-widget4__img.m-widget4__img--logo
+                          img(src='assets/app/media/img/client-logos/logo2.png' alt='')
+                        .m-widget4__info
+                          span.m-widget4__title
+                            | AirApp
+                          br
+                          span.m-widget4__sub
+                            | Awesome App For Project Management
+                        span.m-widget4__ext
+                          span.m-widget4__number.m--font-danger +$6700
+                    // end::Widget 5
+                // end:: Widgets/Top Products
+              .col-xl-4
+                // begin:: Widgets/Activity
+                .m-portlet.m-portlet--bordered-semi.m-portlet--widget-fit.m-portlet--full-height.m-portlet--skin-light.m-portlet--rounded-force
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text.m--font-light
+                          | Activity
+                    .m-portlet__head-tools
+                      ul.m-portlet__nav
+                        li.m-portlet__nav-item.m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                          a.m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-xl(href='#')
+                            i.fa.fa-genderless.m--font-light
+                          .m-dropdown__wrapper
+                            span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                            .m-dropdown__inner
+                              .m-dropdown__body
+                                .m-dropdown__content
+                                  ul.m-nav
+                                    li.m-nav__section.m-nav__section--first
+                                      span.m-nav__section-text Quick Actions
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-share
+                                        span.m-nav__link-text Activity
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-chat-1
+                                        span.m-nav__link-text Messages
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-info
+                                        span.m-nav__link-text FAQ
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text Support
+                                    li.m-nav__separator.m-nav__separator--fit
+                                    li.m-nav__item
+                                      a.btn.btn-outline-danger.m-btn.m-btn--pill.m-btn--wide.btn-sm(href='#') Cancel
+                  .m-portlet__body
+                    .m-widget17
+                      .m-widget17__visual.m-widget17__visual--chart.m-portlet-fit--top.m-portlet-fit--sides.m--bg-danger
+                        .m-widget17__chart(style='height:320px;')
+                          canvas#m_chart_activities
+                      .m-widget17__stats
+                        .m-widget17__items.m-widget17__items-col1
+                          .m-widget17__item
+                            span.m-widget17__icon
+                              i.flaticon-truck.m--font-brand
+                            span.m-widget17__subtitle
+                              | Delivered
+                            span.m-widget17__desc
+                              | 15 New Paskages
+                          .m-widget17__item
+                            span.m-widget17__icon
+                              i.flaticon-paper-plane.m--font-info
+                            span.m-widget17__subtitle
+                              | Reporeted
+                            span.m-widget17__desc
+                              | 72 Support Cases
+                        .m-widget17__items.m-widget17__items-col2
+                          .m-widget17__item
+                            span.m-widget17__icon
+                              i.flaticon-pie-chart.m--font-success
+                            span.m-widget17__subtitle
+                              | Ordered
+                            span.m-widget17__desc
+                              | 72 New Items
+                          .m-widget17__item
+                            span.m-widget17__icon
+                              i.flaticon-time.m--font-danger
+                            span.m-widget17__subtitle
+                              | Arrived
+                            span.m-widget17__desc
+                              | 34 Upgraded Boxes
+                // end:: Widgets/Activity
+              .col-xl-4
+                // begin:: Widgets/Blog
+                .m-portlet.m-portlet--bordered-semi.m-portlet--full-height.m-portlet--rounded-force
+                  .m-portlet__head.m-portlet__head--fit
+                    .m-portlet__head-caption
+                      .m-portlet__head-action
+                        button.btn.btn-sm.m-btn--pill.btn-brand(type='button') Blog
+                  .m-portlet__body
+                    .m-widget19
+                      .m-widget19__pic.m-portlet-fit--top.m-portlet-fit--sides(style='min-height-: 286px')
+                        img(src='assets/app/media/img//blog/blog1.jpg' alt='')
+                        h3.m-widget19__title.m--font-light
+                          | Introducing New Feature
+                        .m-widget19__shadow
+                      .m-widget19__content
+                        .m-widget19__header
+                          .m-widget19__user-img
+                            img.m-widget19__img(src='assets/app/media/img//users/user1.jpg' alt='')
+                          .m-widget19__info
+                            span.m-widget19__username
+                              | Anna Krox
+                            br
+                            span.m-widget19__time
+                              | UX/UI Designer, Google
+                          .m-widget19__stats
+                            span.m-widget19__number.m--font-brand
+                              | 18
+                            span.m-widget19__comment
+                              | Comments
+                        .m-widget19__body
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry scrambled it to make text of the printing and typesetting industry scrambled a type specimen book text of the dummy text of the printing printing and typesetting
+                          | industry scrambled dummy text of the printing.
+                      .m-widget19__action
+                        button.btn.m-btn--pill.btn-secondary.m-btn.m-btn--hover-brand.m-btn--custom(type='button') Read More
+                // end:: Widgets/Blog
+            // End::Section
+            // Begin::Section
+            .m-portlet
+              .m-portlet__body.m-portlet__body--no-padding
+                .row.m-row--no-padding.m-row--col-separator-xl
+                  .col-xl-4
+                    // begin:: Widgets/Stats2-1
+                    .m-widget1
+                      .m-widget1__item
+                        .row.m-row--no-padding.align-items-center
+                          .col
+                            h3.m-widget1__title Member Profit
+                            span.m-widget1__desc Awerage Weekly Profit
+                          .col.m--align-right
+                            span.m-widget1__number.m--font-brand +$17,800
+                      .m-widget1__item
+                        .row.m-row--no-padding.align-items-center
+                          .col
+                            h3.m-widget1__title Orders
+                            span.m-widget1__desc Weekly Customer Orders
+                          .col.m--align-right
+                            span.m-widget1__number.m--font-danger +1,800
+                      .m-widget1__item
+                        .row.m-row--no-padding.align-items-center
+                          .col
+                            h3.m-widget1__title Issue Reports
+                            span.m-widget1__desc System bugs and issues
+                          .col.m--align-right
+                            span.m-widget1__number.m--font-success -27,49%
+                    // end:: Widgets/Stats2-1
+                  .col-xl-4
+                    // begin:: Widgets/Daily Sales
+                    .m-widget14
+                      .m-widget14__header.m--margin-bottom-30
+                        h3.m-widget14__title
+                          | Daily Sales
+                        span.m-widget14__desc
+                          | Check out each collumn for more details
+                      .m-widget14__chart(style='height:120px;')
+                        canvas#m_chart_daily_sales
+                    // end:: Widgets/Daily Sales
+                  .col-xl-4
+                    // begin:: Widgets/Profit Share
+                    .m-widget14
+                      .m-widget14__header
+                        h3.m-widget14__title
+                          | Profit Share
+                        span.m-widget14__desc
+                          | Profit Share between customers
+                      .row.align-items-center
+                        .col
+                          #m_chart_profit_share.m-widget14__chart(style='height: 160px')
+                            .m-widget14__stat 45
+                        .col
+                          .m-widget14__legends
+                            .m-widget14__legend
+                              span.m-widget14__legend-bullet.m--bg-accent
+                              span.m-widget14__legend-text 37% Sport Tickets
+                            .m-widget14__legend
+                              span.m-widget14__legend-bullet.m--bg-warning
+                              span.m-widget14__legend-text 47% Business Events
+                            .m-widget14__legend
+                              span.m-widget14__legend-bullet.m--bg-brand
+                              span.m-widget14__legend-text 19% Others
+                    // end:: Widgets/Profit Share
+            // End::Section
+            // Begin::Section
+            .row
+              .col-xl-4
+                // begin:: Widgets/Blog
+                .m-portlet.m-portlet--head-overlay.m-portlet--full-height.m-portlet--rounded-force
+                  .m-portlet__head.m-portlet__head--fit-
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text.m--font-light
+                          | Personal Income
+                    .m-portlet__head-tools
+                      ul.m-portlet__nav
+                        li.m-portlet__nav-item.m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                          a.m-portlet__nav-link.m-dropdown__toggle.dropdown-toggle.btn.btn--sm.m-btn--pill.m-btn.btn-outline-light.m-btn--hover-light(href='#')
+                            | 2018
+                          .m-dropdown__wrapper
+                            span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                            .m-dropdown__inner
+                              .m-dropdown__body
+                                .m-dropdown__content
+                                  ul.m-nav
+                                    li.m-nav__section.m-nav__section--first
+                                      span.m-nav__section-text Orders
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-share
+                                        span.m-nav__link-text Pending
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-chat-1
+                                        span.m-nav__link-text Delivered
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-info
+                                        span.m-nav__link-text Canceled
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text Approved
+                  .m-portlet__body
+                    .m-widget27.m-portlet-fit--sides
+                      .m-widget27__pic
+                        img(src='assets/app/media/img//bg/bg-4.jpg' alt='')
+                        h3.m-widget27__title.m--font-light
+                          span
+                            span $
+                            | 256,100
+                        .m-widget27__btn
+                          button.btn.m-btn--pill.btn-secondary.m-btn.m-btn--custom.m-btn--bolder(type='button') Inclusive All Earnings
+                      .m-widget27__container
+                        // begin::Nav pills
+                        ul.m-widget27__nav-items.nav.nav-pills.nav-fill(role='tablist')
+                          li.m-widget27__nav-item.nav-item
+                            a.nav-link.active(data-toggle='pill' href='#m_personal_income_quater_1') Quater 1
+                          li.m-widget27__nav-item.nav-item
+                            a.nav-link(data-toggle='pill' href='#m_personal_income_quater_2') Quater 2
+                          li.m-widget27__nav-item.nav-item
+                            a.nav-link(data-toggle='pill' href='#m_personal_income_quater_3') Quater 3
+                          li.m-widget27__nav-item.nav-item
+                            a.nav-link(data-toggle='pill' href='#m_personal_income_quater_4') Quater 4
+                        // end::Nav pills
+                        // begin::Tab Content
+                        .m-widget27__tab.tab-content.m-widget27--no-padding
+                          #m_personal_income_quater_1.tab-pane.active
+                            .row.align-items-center
+                              .col
+                                #m_chart_personal_income_quater_1.m-widget27__chart(style='height: 160px')
+                                  .m-widget27__stat 37
+                              .col
+                                .m-widget27__legends
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-accent
+                                    span.m-widget27__legend-text 37% Case
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-warning
+                                    span.m-widget27__legend-text 42% Events
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-brand
+                                    span.m-widget27__legend-text 19% Others
+                          #m_personal_income_quater_2.tab-pane.fade
+                            .row.align-items-center
+                              .col
+                                #m_chart_personal_income_quater_2.m-widget27__chart(style='height: 160px')
+                                  .m-widget27__stat 70
+                              .col
+                                .m-widget27__legends
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-focus
+                                    span.m-widget27__legend-text 57% Case
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-success
+                                    span.m-widget27__legend-text 20% Events
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-danger
+                                    span.m-widget27__legend-text 19% Others
+                          #m_personal_income_quater_3.tab-pane.fade
+                            .row.align-items-center
+                              .col
+                                #m_chart_personal_income_quater_3.m-widget27__chart(style='height: 160px')
+                                  .m-widget27__stat 67
+                              .col
+                                .m-widget27__legends
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-info
+                                    span.m-widget27__legend-text 47% Case
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-danger
+                                    span.m-widget27__legend-text 55% Events
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-brand
+                                    span.m-widget27__legend-text 27% Others
+                          #m_personal_income_quater_4.tab-pane.fade
+                            .row.align-items-center
+                              .col
+                                #m_chart_personal_income_quater_4.m-widget27__chart(style='height: 160px')
+                                  .m-widget27__stat 77
+                              .col
+                                .m-widget27__legends
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-warning
+                                    span.m-widget27__legend-text 37% Case
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-primary
+                                    span.m-widget27__legend-text 65% Events
+                                  .m-widget27__legend
+                                    span.m-widget27__legend-bullet.m--bg-danger
+                                    span.m-widget27__legend-text 33% Others
+                        // end::Tab Content
+                // end:: Widgets/Blog
+              .col-xl-4
+                // begin:: Widgets/Blog
+                .m-portlet.m-portlet--head-overlay.m-portlet--full-height.m-portlet--rounded-force
+                  .m-portlet__head.m-portlet__head--fit
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text.m--font-light
+                          | Finance Stats
+                    .m-portlet__head-tools
+                      ul.m-portlet__nav
+                        li.m-portlet__nav-item.m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                          a.m-portlet__nav-link.m-dropdown__toggle.dropdown-toggle.btn.btn--sm.m-btn--pill.m-btn.btn-outline-light.m-btn--hover-light(href='#')
+                            | 2018
+                          .m-dropdown__wrapper
+                            span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                            .m-dropdown__inner
+                              .m-dropdown__body
+                                .m-dropdown__content
+                                  ul.m-nav
+                                    li.m-nav__section.m-nav__section--first
+                                      span.m-nav__section-text Reports
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-share
+                                        span.m-nav__link-text Activity
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-chat-1
+                                        span.m-nav__link-text Messages
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-info
+                                        span.m-nav__link-text FAQ
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text Support
+                  .m-portlet__body
+                    .m-widget28
+                      .m-widget28__pic.m-portlet-fit--sides
+                      .m-widget28__container
+                        // begin::Nav pills
+                        ul.m-widget28__nav-items.nav.nav-pills.nav-fill(role='tablist')
+                          li.m-widget28__nav-item.nav-item
+                            a.nav-link.active(data-toggle='pill' href='#menu11')
+                              span
+                                i.fa.flaticon-pie-chart
+                              span GMI Taxes
+                          li.m-widget28__nav-item.nav-item
+                            a.nav-link(data-toggle='pill' href='#menu21')
+                              span
+                                i.fa.flaticon-file-1
+                              span IMT Invoice
+                          li.m-widget28__nav-item.nav-item
+                            a.nav-link(data-toggle='pill' href='#menu31')
+                              span
+                                i.fa.flaticon-clipboard
+                              span Main Notes
+                        // end::Nav pills
+                        // begin::Tab Content
+                        .m-widget28__tab.tab-content
+                          #menu11.m-widget28__tab-container.tab-pane.active
+                            .m-widget28__tab-items
+                              .m-widget28__tab-item
+                                span Company Name
+                                span SLT Back-end Solutions
+                              .m-widget28__tab-item
+                                span INE Number
+                                span D330-1234562546
+                              .m-widget28__tab-item
+                                span Total Charges
+                                span USD 1,250.000
+                              .m-widget28__tab-item
+                                span Project Description
+                                span Creating Back-end Components
+                          #menu21.m-widget28__tab-container.tab-pane.fade
+                            .m-widget28__tab-items
+                              .m-widget28__tab-item
+                                span Project Description
+                                span Back-End Web Architecture
+                              .m-widget28__tab-item
+                                span Total Charges
+                                span USD 2,170.000
+                              .m-widget28__tab-item
+                                span INE Number
+                                span D110-1234562546
+                              .m-widget28__tab-item
+                                span Company Name
+                                span SLT Back-end Solutions
+                          #menu31.m-widget28__tab-container.tab-pane.fade
+                            .m-widget28__tab-items
+                              .m-widget28__tab-item
+                                span Total Charges
+                                span USD 3,450.000
+                              .m-widget28__tab-item
+                                span Project Description
+                                span Creating Back-end Components
+                              .m-widget28__tab-item
+                                span Company Name
+                                span SLT Back-end Solutions
+                              .m-widget28__tab-item
+                                span INE Number
+                                span D510-7431562548
+                        // end::Tab Content
+                // end:: Widgets/Blog
+              .col-xl-4
+                // begin:: Packages
+                .m-portlet.m--bg-warning.m-portlet--bordered-semi.m-portlet--full-height
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text.m--font-light
+                          | Packages
+                    .m-portlet__head-tools
+                      ul.m-portlet__nav
+                        li.m-portlet__nav-item.m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                          a.m-portlet__nav-link.m-dropdown__toggle.dropdown-toggle.btn.btn--sm.m-btn--pill.m-btn.btn-outline-light.m-btn--hover-light(href='#')
+                            | 2018
+                          .m-dropdown__wrapper
+                            span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                            .m-dropdown__inner
+                              .m-dropdown__body
+                                .m-dropdown__content
+                                  ul.m-nav
+                                    li.m-nav__section.m-nav__section--first
+                                      span.m-nav__section-text Reports
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-share
+                                        span.m-nav__link-text Activity
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-chat-1
+                                        span.m-nav__link-text Messages
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-info
+                                        span.m-nav__link-text FAQ
+                                    li.m-nav__section.m-nav__section--first
+                                      span.m-nav__section-text Export
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text PDF
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text Excel
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text CSV
+                  .m-portlet__body
+                    // begin::Widget 29
+                    .m-widget29
+                      .m-widget_content
+                        h3.m-widget_content-title Monthly Income
+                        .m-widget_content-items
+                          .m-widget_content-item
+                            span Total
+                            span.m--font-accent $680
+                          .m-widget_content-item
+                            span Change
+                            span.m--font-brand +15%
+                          .m-widget_content-item
+                            span Licenses
+                            span 29
+                      .m-widget_content
+                        h3.m-widget_content-title Taxes info
+                        .m-widget_content-items
+                          .m-widget_content-item
+                            span Total
+                            span.m--font-accent 22.50
+                          .m-widget_content-item
+                            span Change
+                            span.m--font-brand +15%
+                          .m-widget_content-item
+                            span Count
+                            span 701
+                      .m-widget_content
+                        h3.m-widget_content-title Partners Sale
+                        .m-widget_content-items
+                          .m-widget_content-item
+                            span Total
+                            span.m--font-accent $680
+                          .m-widget_content-item
+                            span Change
+                            span.m--font-brand +15%
+                          .m-widget_content-item
+                            span Licenses
+                            span 29
+                    // end::Widget 29
+                // end:: Packages
+            // End::Section
+            // Begin::Section
+            .row
+              .col-xl-6
+                // begin:: Widgets/Tasks
+                .m-portlet.m-portlet--full-height
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          | Tasks
+                    .m-portlet__head-tools
+                      ul.nav.nav-pills.nav-pills--brand.m-nav-pills--align-right.m-nav-pills--btn-pill.m-nav-pills--btn-sm(role='tablist')
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link.active(data-toggle='tab' href='#m_widget2_tab1_content' role='tab')
+                            | Today
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link(data-toggle='tab' href='#m_widget2_tab2_content1' role='tab')
+                            | Week
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link(data-toggle='tab' href='#m_widget2_tab3_content1' role='tab')
+                            | Month
+                  .m-portlet__body
+                    .tab-content
+                      #m_widget2_tab1_content.tab-pane.active
+                        .m-widget2
+                          .m-widget2__item.m-widget2__item--primary
+                            .m-widget2__checkbox
+                              label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand
+                                input(type='checkbox')
+                                span
+                            .m-widget2__desc
+                              span.m-widget2__text
+                                | Make Metronic Great Again.Lorem Ipsum Amet
+                              br
+                              span.m-widget2__user-name
+                                a.m-widget2__link(href='#')
+                                  | By Bob
+                            .m-widget2__actions
+                              .m-widget2__actions-nav
+                                .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                                  a.m-dropdown__toggle(href='#')
+                                    i.la.la-ellipsis-h
+                                  .m-dropdown__wrapper
+                                    span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                                    .m-dropdown__inner
+                                      .m-dropdown__body
+                                        .m-dropdown__content
+                                          ul.m-nav
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-share
+                                                span.m-nav__link-text Activity
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-chat-1
+                                                span.m-nav__link-text Messages
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-info
+                                                span.m-nav__link-text FAQ
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-lifebuoy
+                                                span.m-nav__link-text Support
+                          .m-widget2__item.m-widget2__item--warning
+                            .m-widget2__checkbox
+                              label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand
+                                input(type='checkbox')
+                                span
+                            .m-widget2__desc
+                              span.m-widget2__text
+                                | Prepare Docs For Metting On Monday
+                              br
+                              span.m-widget2__user-name
+                                a.m-widget2__link(href='#')
+                                  | By Sean
+                            .m-widget2__actions
+                              .m-widget2__actions-nav
+                                .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                                  a.m-dropdown__toggle(href='#')
+                                    i.la.la-ellipsis-h
+                                  .m-dropdown__wrapper
+                                    span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                                    .m-dropdown__inner
+                                      .m-dropdown__body
+                                        .m-dropdown__content
+                                          ul.m-nav
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-share
+                                                span.m-nav__link-text Activity
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-chat-1
+                                                span.m-nav__link-text Messages
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-info
+                                                span.m-nav__link-text FAQ
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-lifebuoy
+                                                span.m-nav__link-text Support
+                          .m-widget2__item.m-widget2__item--brand
+                            .m-widget2__checkbox
+                              label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand
+                                input(type='checkbox')
+                                span
+                            .m-widget2__desc
+                              span.m-widget2__text
+                                | Make Widgets Great Again.Estudiat Communy Elit
+                              br
+                              span.m-widget2__user-name
+                                a.m-widget2__link(href='#')
+                                  | By Aziko
+                            .m-widget2__actions
+                              .m-widget2__actions-nav
+                                .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                                  a.m-dropdown__toggle(href='#')
+                                    i.la.la-ellipsis-h
+                                  .m-dropdown__wrapper
+                                    span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                                    .m-dropdown__inner
+                                      .m-dropdown__body
+                                        .m-dropdown__content
+                                          ul.m-nav
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-share
+                                                span.m-nav__link-text Activity
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-chat-1
+                                                span.m-nav__link-text Messages
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-info
+                                                span.m-nav__link-text FAQ
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-lifebuoy
+                                                span.m-nav__link-text Support
+                          .m-widget2__item.m-widget2__item--success
+                            .m-widget2__checkbox
+                              label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand
+                                input(type='checkbox')
+                                span
+                            .m-widget2__desc
+                              span.m-widget2__text
+                                | Make Metronic Great Again.Lorem Ipsum
+                              br
+                              span.m-widget2__user-name
+                                a.m-widget2__link(href='#')
+                                  | By James
+                            .m-widget2__actions
+                              .m-widget2__actions-nav
+                                .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                                  a.m-dropdown__toggle(href='#')
+                                    i.la.la-ellipsis-h
+                                  .m-dropdown__wrapper
+                                    span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                                    .m-dropdown__inner
+                                      .m-dropdown__body
+                                        .m-dropdown__content
+                                          ul.m-nav
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-share
+                                                span.m-nav__link-text Activity
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-chat-1
+                                                span.m-nav__link-text Messages
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-info
+                                                span.m-nav__link-text FAQ
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-lifebuoy
+                                                span.m-nav__link-text Support
+                          .m-widget2__item.m-widget2__item--danger
+                            .m-widget2__checkbox
+                              label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand
+                                input(type='checkbox')
+                                span
+                            .m-widget2__desc
+                              span.m-widget2__text
+                                | Completa Financial Report For Emirates Airlines
+                              br
+                              span.m-widget2__user-name
+                                a.m-widget2__link(href='#')
+                                  | By Bob
+                            .m-widget2__actions
+                              .m-widget2__actions-nav
+                                .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                                  a.m-dropdown__toggle(href='#')
+                                    i.la.la-ellipsis-h
+                                  .m-dropdown__wrapper
+                                    span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                                    .m-dropdown__inner
+                                      .m-dropdown__body
+                                        .m-dropdown__content
+                                          ul.m-nav
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-share
+                                                span.m-nav__link-text Activity
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-chat-1
+                                                span.m-nav__link-text Messages
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-info
+                                                span.m-nav__link-text FAQ
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-lifebuoy
+                                                span.m-nav__link-text Support
+                          .m-widget2__item.m-widget2__item--info
+                            .m-widget2__checkbox
+                              label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand
+                                input(type='checkbox')
+                                span
+                            .m-widget2__desc
+                              span.m-widget2__text
+                                | Completa Financial Report For Emirates Airlines
+                              br
+                              span.m-widget2__user-name
+                                a.m-widget2__link(href='#')
+                                  | By Sean
+                            .m-widget2__actions
+                              .m-widget2__actions-nav
+                                .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                                  a.m-dropdown__toggle(href='#')
+                                    i.la.la-ellipsis-h
+                                  .m-dropdown__wrapper
+                                    span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                                    .m-dropdown__inner
+                                      .m-dropdown__body
+                                        .m-dropdown__content
+                                          ul.m-nav
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-share
+                                                span.m-nav__link-text Activity
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-chat-1
+                                                span.m-nav__link-text Messages
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-info
+                                                span.m-nav__link-text FAQ
+                                            li.m-nav__item
+                                              a.m-nav__link(href='')
+                                                i.m-nav__link-icon.flaticon-lifebuoy
+                                                span.m-nav__link-text Support
+                      #m_widget2_tab2_content.tab-pane
+                      #m_widget2_tab3_content.tab-pane
+                // end:: Widgets/Tasks
+              .col-xl-6
+                // begin:: Widgets/Support Tickets
+                .m-portlet.m-portlet--full-height
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          | Support Tickets
+                    .m-portlet__head-tools
+                      ul.m-portlet__nav
+                        li.m-portlet__nav-item.m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover' aria-expanded='true')
+                          a.m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-xl.m-dropdown__toggle(href='#')
+                            i.la.la-ellipsis-h.m--font-brand
+                          .m-dropdown__wrapper
+                            span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                            .m-dropdown__inner
+                              .m-dropdown__body
+                                .m-dropdown__content
+                                  ul.m-nav
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-share
+                                        span.m-nav__link-text Activity
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-chat-1
+                                        span.m-nav__link-text Messages
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-info
+                                        span.m-nav__link-text FAQ
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text Support
+                  .m-portlet__body
+                    .m-widget3
+                      .m-widget3__item
+                        .m-widget3__header
+                          .m-widget3__user-img
+                            img.m-widget3__img(src='assets/app/media/img/users/user1.jpg' alt='')
+                          .m-widget3__info
+                            span.m-widget3__username
+                              | Melania Trump
+                            br
+                            span.m-widget3__time
+                              | 2 day ago
+                          span.m-widget3__status.m--font-info
+                            | Pending
+                        .m-widget3__body
+                          p.m-widget3__text
+                            | Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.
+                      .m-widget3__item
+                        .m-widget3__header
+                          .m-widget3__user-img
+                            img.m-widget3__img(src='assets/app/media/img/users/user4.jpg' alt='')
+                          .m-widget3__info
+                            span.m-widget3__username
+                              | Lebron King James
+                            br
+                            span.m-widget3__time
+                              | 1 day ago
+                          span.m-widget3__status.m--font-brand
+                            | Open
+                        .m-widget3__body
+                          p.m-widget3__text
+                            | Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.Ut wisi enim ad minim veniam,quis nostrud exerci tation ullamcorper.
+                      .m-widget3__item
+                        .m-widget3__header
+                          .m-widget3__user-img
+                            img.m-widget3__img(src='assets/app/media/img/users/user5.jpg' alt='')
+                          .m-widget3__info
+                            span.m-widget3__username
+                              | Deb Gibson
+                            br
+                            span.m-widget3__time
+                              | 3 weeks ago
+                          span.m-widget3__status.m--font-success
+                            | Closed
+                        .m-widget3__body
+                          p.m-widget3__text
+                            | Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.
+                // end:: Widgets/Support Tickets
+            // End::Section
+            // Begin::Section
+            .row
+              .col-xl-6.col-lg-12
+                // Begin::Portlet
+                .m-portlet.m-portlet--full-height
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          | Recent Activities
+                    .m-portlet__head-tools
+                      ul.m-portlet__nav
+                        li.m-portlet__nav-item.m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover' aria-expanded='true')
+                          a.m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-xl.m-dropdown__toggle(href='#')
+                            i.la.la-ellipsis-h.m--font-brand
+                          .m-dropdown__wrapper
+                            span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                            .m-dropdown__inner
+                              .m-dropdown__body
+                                .m-dropdown__content
+                                  ul.m-nav
+                                    li.m-nav__section.m-nav__section--first
+                                      span.m-nav__section-text Quick Actions
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-share
+                                        span.m-nav__link-text Activity
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-chat-1
+                                        span.m-nav__link-text Messages
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-info
+                                        span.m-nav__link-text FAQ
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text Support
+                                    li.m-nav__separator.m-nav__separator--fit
+                                    li.m-nav__item
+                                      a.btn.btn-outline-danger.m-btn.m-btn--pill.m-btn--wide.btn-sm(href='#') Cancel
+                  .m-portlet__body
+                    .m-scrollable(data-scrollable='true' data-height='380' data-mobile-height='300')
+                      // Begin::Timeline 2
+                      .m-timeline-2
+                        .m-timeline-2__items.m--padding-top-25.m--padding-bottom-30
+                          .m-timeline-2__item
+                            span.m-timeline-2__item-time 10:00
+                            .m-timeline-2__item-cricle
+                              i.fa.fa-genderless.m--font-danger
+                            .m-timeline-2__item-text.m--padding-top-5
+                              | Lorem ipsum dolor sit amit,consectetur eiusmdd tempor
+                              br
+                              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;incididunt ut labore et dolore magna
+                          .m-timeline-2__item.m--margin-top-30
+                            span.m-timeline-2__item-time 12:45
+                            .m-timeline-2__item-cricle
+                              i.fa.fa-genderless.m--font-success
+                            .m-timeline-2__item-text.m-timeline-2__item-text--bold
+                              | AEOL Meeting With
+                            .m-list-pics.m-list-pics--sm.m--padding-left-20
+                              a(href='#')
+                                img(src='assets/app/media/img/users/100_4.jpg' title='')
+                              a(href='#')
+                                img(src='assets/app/media/img/users/100_13.jpg' title='')
+                              a(href='#')
+                                img(src='assets/app/media/img/users/100_11.jpg' title='')
+                              a(href='#')
+                                img(src='assets/app/media/img/users/100_14.jpg' title='')
+                          .m-timeline-2__item.m--margin-top-30
+                            span.m-timeline-2__item-time 14:00
+                            .m-timeline-2__item-cricle
+                              i.fa.fa-genderless.m--font-brand
+                            .m-timeline-2__item-text.m--padding-top-5
+                              | Make Deposit 
+                              a.m-link.m-link--brand.m--font-bolder(href='#') USD 700
+                              |  To ESL.
+                          .m-timeline-2__item.m--margin-top-30
+                            span.m-timeline-2__item-time 16:00
+                            .m-timeline-2__item-cricle
+                              i.fa.fa-genderless.m--font-warning
+                            .m-timeline-2__item-text.m--padding-top-5
+                              | Lorem ipsum dolor sit amit,consectetur eiusmdd tempor
+                              br
+                              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;incididunt ut labore et dolore magna elit enim at minim
+                              br
+                              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;veniam quis nostrud
+                          .m-timeline-2__item.m--margin-top-30
+                            span.m-timeline-2__item-time 17:00
+                            .m-timeline-2__item-cricle
+                              i.fa.fa-genderless.m--font-info
+                            .m-timeline-2__item-text.m--padding-top-5
+                              | Placed a new order in 
+                              a.m-link.m-link--brand.m--font-bolder(href='#') SIGNATURE MOBILE
+                              |  marketplace.
+                          .m-timeline-2__item.m--margin-top-30
+                            span.m-timeline-2__item-time 16:00
+                            .m-timeline-2__item-cricle
+                              i.fa.fa-genderless.m--font-brand
+                            .m-timeline-2__item-text.m--padding-top-5
+                              | Lorem ipsum dolor sit amit,consectetur eiusmdd tempor
+                              br
+                              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;incididunt ut labore et dolore magna elit enim at minim
+                              br
+                              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;veniam quis nostrud
+                          .m-timeline-2__item.m--margin-top-30
+                            span.m-timeline-2__item-time 17:00
+                            .m-timeline-2__item-cricle
+                              i.fa.fa-genderless.m--font-danger
+                            .m-timeline-2__item-text.m--padding-top-5
+                              | Received a new feedback on 
+                              a.m-link.m-link--brand.m--font-bolder(href='#') FinancePro App
+                              |  product.
+                      // End::Timeline 2
+                // End::Portlet
+              .col-xl-6.col-lg-12
+                // Begin::Portlet
+                .m-portlet.m-portlet--full-height
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          | Recent Notifications
+                    .m-portlet__head-tools
+                      ul.nav.nav-pills.nav-pills--brand.m-nav-pills--align-right.m-nav-pills--btn-pill.m-nav-pills--btn-sm(role='tablist')
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link.active(data-toggle='tab' href='#m_widget2_tab1_content' role='tab')
+                            | Today
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link(data-toggle='tab' href='#m_widget2_tab2_content' role='tab')
+                            | Month
+                  .m-portlet__body
+                    .tab-content
+                      #m_widget2_tab1_content.tab-pane.active
+                        // Begin::Timeline 3
+                        .m-timeline-3
+                          .m-timeline-3__items
+                            .m-timeline-3__item.m-timeline-3__item--info
+                              span.m-timeline-3__item-time 09:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Lorem ipsum dolor sit amit,consectetur eiusmdd tempor
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Bob
+                            .m-timeline-3__item.m-timeline-3__item--warning
+                              span.m-timeline-3__item-time 10:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Lorem ipsum dolor sit amit
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Sean
+                            .m-timeline-3__item.m-timeline-3__item--brand
+                              span.m-timeline-3__item-time 11:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Lorem ipsum dolor sit amit eiusmdd tempor
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By James
+                            .m-timeline-3__item.m-timeline-3__item--success
+                              span.m-timeline-3__item-time 12:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Lorem ipsum dolor
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By James
+                            .m-timeline-3__item.m-timeline-3__item--danger
+                              span.m-timeline-3__item-time 14:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Lorem ipsum dolor sit amit,consectetur eiusmdd
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Derrick
+                            .m-timeline-3__item.m-timeline-3__item--info
+                              span.m-timeline-3__item-time 15:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Lorem ipsum dolor sit amit,consectetur
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Iman
+                            .m-timeline-3__item.m-timeline-3__item--brand
+                              span.m-timeline-3__item-time 17:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Lorem ipsum dolor sit consectetur eiusmdd tempor
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Aziko
+                        // End::Timeline 3
+                      #m_widget2_tab2_content.tab-pane
+                        // Begin::Timeline 3
+                        .m-timeline-3
+                          .m-timeline-3__items
+                            .m-timeline-3__item.m-timeline-3__item--info
+                              span.m-timeline-3__item-time.m--font-focus 09:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Contrary to popular belief, Lorem Ipsum is not simply random text.
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Bob
+                            .m-timeline-3__item.m-timeline-3__item--warning
+                              span.m-timeline-3__item-time.m--font-warning 10:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | There are many variations of passages of Lorem Ipsum available.
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Sean
+                            .m-timeline-3__item.m-timeline-3__item--brand
+                              span.m-timeline-3__item-time.m--font-primary 11:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Contrary to popular belief, Lorem Ipsum is not simply random text.
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By James
+                            .m-timeline-3__item.m-timeline-3__item--success
+                              span.m-timeline-3__item-time.m--font-success 12:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | The standard chunk of Lorem Ipsum used since the 1500s is reproduced.
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By James
+                            .m-timeline-3__item.m-timeline-3__item--danger
+                              span.m-timeline-3__item-time.m--font-warning 14:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Latin words, combined with a handful of model sentence structures.
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Derrick
+                            .m-timeline-3__item.m-timeline-3__item--info
+                              span.m-timeline-3__item-time.m--font-info 15:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Contrary to popular belief, Lorem Ipsum is not simply random text.
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Iman
+                            .m-timeline-3__item.m-timeline-3__item--brand
+                              span.m-timeline-3__item-time.m--font-danger 17:00
+                              .m-timeline-3__item-desc
+                                span.m-timeline-3__item-text
+                                  | Lorem Ipsum is therefore always free from repetition, injected humour.
+                                br
+                                span.m-timeline-3__item-user-name
+                                  a.m-link.m-link--metal.m-timeline-3__item-link(href='#')
+                                    | By Aziko
+                        // End::Timeline 3
+                // End::Portlet
+            // End::Section
+            // Begin::Section
+            .row
+              .col-xl-8
+                .m-portlet.m-portlet--mobile
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          | Exclusive Datatable Plugin
+                    .m-portlet__head-tools
+                      ul.m-portlet__nav
+                        li.m-portlet__nav-item
+                          .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover' aria-expanded='true')
+                            a.m-portlet__nav-link.btn.btn-lg.btn-secondary.m-btn.m-btn--icon.m-btn--icon-only.m-btn--pill.m-dropdown__toggle(href='#')
+                              i.la.la-ellipsis-h.m--font-brand
+                            .m-dropdown__wrapper
+                              span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                              .m-dropdown__inner
+                                .m-dropdown__body
+                                  .m-dropdown__content
+                                    ul.m-nav
+                                      li.m-nav__section.m-nav__section--first
+                                        span.m-nav__section-text Quick Actions
+                                      li.m-nav__item
+                                        a.m-nav__link(href='')
+                                          i.m-nav__link-icon.flaticon-share
+                                          span.m-nav__link-text Create Post
+                                      li.m-nav__item
+                                        a.m-nav__link(href='')
+                                          i.m-nav__link-icon.flaticon-chat-1
+                                          span.m-nav__link-text Send Messages
+                                      li.m-nav__item
+                                        a.m-nav__link(href='')
+                                          i.m-nav__link-icon.flaticon-multimedia-2
+                                          span.m-nav__link-text Upload File
+                                      li.m-nav__section
+                                        span.m-nav__section-text Useful Links
+                                      li.m-nav__item
+                                        a.m-nav__link(href='')
+                                          i.m-nav__link-icon.flaticon-info
+                                          span.m-nav__link-text FAQ
+                                      li.m-nav__item
+                                        a.m-nav__link(href='')
+                                          i.m-nav__link-icon.flaticon-lifebuoy
+                                          span.m-nav__link-text Support
+                                      li.m-nav__separator.m-nav__separator--fit.m--hide
+                                      li.m-nav__item.m--hide
+                                        a.btn.btn-outline-danger.m-btn.m-btn--pill.m-btn--wide.btn-sm(href='#') Submit
+                  .m-portlet__body
+                    // begin: Datatable
+                    #m_datatable_latest_orders.m_datatable
+                    // end: Datatable
+              .col-xl-4
+                // begin:: Widgets/Audit Log
+                .m-portlet.m-portlet--full-height
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          | Audit Log
+                    .m-portlet__head-tools
+                      ul.nav.nav-pills.nav-pills--brand.m-nav-pills--align-right.m-nav-pills--btn-pill.m-nav-pills--btn-sm(role='tablist')
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link.active(data-toggle='tab' href='#m_widget4_tab1_content' role='tab')
+                            | Today
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link(data-toggle='tab' href='#m_widget4_tab2_content' role='tab')
+                            | Week
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link(data-toggle='tab' href='#m_widget4_tab3_content' role='tab')
+                            | Month
+                  .m-portlet__body
+                    .tab-content
+                      #m_widget4_tab1_content.tab-pane.active
+                        .m-scrollable(data-scrollable='true' data-height='400' style='height: 400px; overflow: hidden;')
+                          .m-list-timeline.m-list-timeline--skin-light
+                            .m-list-timeline__items
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--success
+                                span.m-list-timeline__text 12 new users registered
+                                span.m-list-timeline__time Just now
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--info
+                                span.m-list-timeline__text
+                                  | System shutdown 
+                                  span.m-badge.m-badge--success.m-badge--wide pending
+                                span.m-list-timeline__time 14 mins
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--danger
+                                span.m-list-timeline__text New invoice received
+                                span.m-list-timeline__time 20 mins
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--accent
+                                span.m-list-timeline__text
+                                  | DB overloaded 80% 
+                                  span.m-badge.m-badge--info.m-badge--wide settled
+                                span.m-list-timeline__time 1 hr
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--warning
+                                span.m-list-timeline__text
+                                  | System error - 
+                                  a.m-link(href='#') Check
+                                span.m-list-timeline__time 2 hrs
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--brand
+                                span.m-list-timeline__text Production server down
+                                span.m-list-timeline__time 3 hrs
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--info
+                                span.m-list-timeline__text Production server up
+                                span.m-list-timeline__time 5 hrs
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--success
+                                span.m-list-timeline__text(href='')
+                                  | New order received 
+                                  span.m-badge.m-badge--danger.m-badge--wide urgent
+                                span.m-list-timeline__time 7 hrs
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--success
+                                span.m-list-timeline__text 12 new users registered
+                                span.m-list-timeline__time Just now
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--info
+                                span.m-list-timeline__text
+                                  | System shutdown 
+                                  span.m-badge.m-badge--success.m-badge--wide pending
+                                span.m-list-timeline__time 14 mins
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--danger
+                                span.m-list-timeline__text New invoice received
+                                span.m-list-timeline__time 20 mins
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--accent
+                                span.m-list-timeline__text
+                                  | DB overloaded 80% 
+                                  span.m-badge.m-badge--info.m-badge--wide settled
+                                span.m-list-timeline__time 1 hr
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--danger
+                                span.m-list-timeline__text New invoice received
+                                span.m-list-timeline__time 20 mins
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--accent
+                                span.m-list-timeline__text
+                                  | DB overloaded 80% 
+                                  span.m-badge.m-badge--info.m-badge--wide settled
+                                span.m-list-timeline__time 1 hr
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--warning
+                                span.m-list-timeline__text
+                                  | System error - 
+                                  a.m-link(href='#') Check
+                                span.m-list-timeline__time 2 hrs
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--brand
+                                span.m-list-timeline__text Production server down
+                                span.m-list-timeline__time 3 hrs
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--info
+                                span.m-list-timeline__text Production server up
+                                span.m-list-timeline__time 5 hrs
+                              .m-list-timeline__item
+                                span.m-list-timeline__badge.m-list-timeline__badge--success
+                                span.m-list-timeline__text(href='')
+                                  | New order received 
+                                  span.m-badge.m-badge--danger.m-badge--wide urgent
+                                span.m-list-timeline__time 7 hrs
+                      #m_widget4_tab2_content.tab-pane
+                      #m_widget4_tab3_content.tab-pane
+                // end:: Widgets/Audit Log
+            // End::Section
+            // Begin::Section
+            .row
+              .col-xl-8
+                // begin:: Widgets/Best Sellers
+                .m-portlet.m-portlet--full-height
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          | Best Sellers
+                    .m-portlet__head-tools
+                      ul.nav.nav-pills.nav-pills--brand.m-nav-pills--align-right.m-nav-pills--btn-pill.m-nav-pills--btn-sm(role='tablist')
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link.active(data-toggle='tab' href='#m_widget5_tab1_content' role='tab')
+                            | Last Month
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link(data-toggle='tab' href='#m_widget5_tab2_content' role='tab')
+                            | last Year
+                        li.nav-item.m-tabs__item
+                          a.nav-link.m-tabs__link(data-toggle='tab' href='#m_widget5_tab3_content' role='tab')
+                            | All time
+                  .m-portlet__body
+                    // begin::Content
+                    .tab-content
+                      #m_widget5_tab1_content.tab-pane.active(aria-expanded='true')
+                        // begin::m-widget5
+                        .m-widget5
+                          .m-widget5__item
+                            .m-widget5__content
+                              .m-widget5__pic
+                                img.m-widget7__img(src='assets/app/media/img//products/product6.jpg' alt='')
+                              .m-widget5__section
+                                h4.m-widget5__title
+                                  | Great Logo Designn
+                                span.m-widget5__desc
+                                  | Make Metronic Great Again.Lorem Ipsum Amet
+                                .m-widget5__info
+                                  span.m-widget5__author
+                                    | Author:
+                                  span.m-widget5__info-label
+                                    | author:
+                                  span.m-widget5__info-author-name
+                                    | Fly themes
+                                  span.m-widget5__info-label
+                                    | Released:
+                                  span.m-widget5__info-date.m--font-info
+                                    | 23.08.17
+                            .m-widget5__content
+                              .m-widget5__stats1
+                                span.m-widget5__number 19,200
+                                br
+                                span.m-widget5__sales sales
+                              .m-widget5__stats2
+                                span.m-widget5__number 1046
+                                br
+                                span.m-widget5__votes votes
+                          .m-widget5__item
+                            .m-widget5__content
+                              .m-widget5__pic
+                                img.m-widget7__img(src='assets/app/media/img//products/product10.jpg' alt='')
+                              .m-widget5__section
+                                h4.m-widget5__title
+                                  | Branding Mockup
+                                span.m-widget5__desc
+                                  | Make Metronic Great Again.Lorem Ipsum Amet
+                                .m-widget5__info
+                                  span.m-widget5__author
+                                    | Author:
+                                  span.m-widget5__info-author.m--font-info
+                                    | Fly themes
+                                  span.m-widget5__info-label
+                                    | Released:
+                                  span.m-widget5__info-date.m--font-info
+                                    | 23.08.17
+                            .m-widget5__content
+                              .m-widget5__stats1
+                                span.m-widget5__number 24,583
+                                br
+                                span.m-widget5__sales sales
+                              .m-widget5__stats2
+                                span.m-widget5__number 3809
+                                br
+                                span.m-widget5__votes votes
+                          .m-widget5__item
+                            .m-widget5__content
+                              .m-widget5__pic
+                                img.m-widget7__img(src='assets/app/media/img//products/product11.jpg' alt='')
+                              .m-widget5__section
+                                h4.m-widget5__title
+                                  | Awesome Mobile App
+                                span.m-widget5__desc
+                                  | Make Metronic Great Again.Lorem Ipsum Amet
+                                .m-widget5__info
+                                  span.m-widget5__author
+                                    | Author:
+                                  span.m-widget5__info-author.m--font-info
+                                    | Fly themes
+                                  span.m-widget5__info-label
+                                    | Released:
+                                  span.m-widget5__info-date.m--font-info
+                                    | 23.08.17
+                            .m-widget5__content
+                              .m-widget5__stats1
+                                span.m-widget5__number 10,054
+                                br
+                                span.m-widget5__sales sales
+                              .m-widget5__stats2
+                                span.m-widget5__number 1103
+                                br
+                                span.m-widget5__votes votes
+                        // end::m-widget5
+                      #m_widget5_tab2_content.tab-pane(aria-expanded='false')
+                        // begin::m-widget5
+                        .m-widget5
+                          .m-widget5__item
+                            .m-widget5__content
+                              .m-widget5__pic
+                                img.m-widget7__img(src='assets/app/media/img//products/product11.jpg' alt='')
+                              .m-widget5__section
+                                h4.m-widget5__title
+                                  | Branding Mockup
+                                span.m-widget5__desc
+                                  | Make Metronic Great Again.Lorem Ipsum Amet
+                                .m-widget5__info
+                                  span.m-widget5__author
+                                    | Author:
+                                  span.m-widget5__info-author.m--font-info
+                                    | Fly themes
+                                  span.m-widget5__info-label
+                                    | Released:
+                                  span.m-widget5__info-date.m--font-info
+                                    | 23.08.17
+                            .m-widget5__content
+                              .m-widget5__stats1
+                                span.m-widget5__number 24,583
+                                br
+                                span.m-widget5__sales sales
+                              .m-widget5__stats2
+                                span.m-widget5__number 3809
+                                br
+                                span.m-widget5__votes votes
+                          .m-widget5__item
+                            .m-widget5__content
+                              .m-widget5__pic
+                                img.m-widget7__img(src='assets/app/media/img//products/product6.jpg' alt='')
+                              .m-widget5__section
+                                h4.m-widget5__title
+                                  | Great Logo Designn
+                                span.m-widget5__desc
+                                  | Make Metronic Great Again.Lorem Ipsum Amet
+                                .m-widget5__info
+                                  span.m-widget5__author
+                                    | Author:
+                                  span.m-widget5__info-author.m--font-info
+                                    | Fly themes
+                                  span.m-widget5__info-label
+                                    | Released:
+                                  span.m-widget5__info-date.m--font-info
+                                    | 23.08.17
+                            .m-widget5__content
+                              .m-widget5__stats1
+                                span.m-widget5__number 19,200
+                                br
+                                span.m-widget5__sales sales
+                              .m-widget5__stats2
+                                span.m-widget5__number 1046
+                                br
+                                span.m-widget5__votes votes
+                          .m-widget5__item
+                            .m-widget5__content
+                              .m-widget5__pic
+                                img.m-widget7__img(src='assets/app/media/img//products/product10.jpg' alt='')
+                              .m-widget5__section
+                                h4.m-widget5__title
+                                  | Awesome Mobile App
+                                span.m-widget5__desc
+                                  | Make Metronic Great Again.Lorem Ipsum Amet
+                                .m-widget5__info
+                                  span.m-widget5__author
+                                    | Author:
+                                  span.m-widget5__info-author.m--font-info
+                                    | Fly themes
+                                  span.m-widget5__info-label
+                                    | Released:
+                                  span.m-widget5__info-date.m--font-info
+                                    | 23.08.17
+                            .m-widget5__content
+                              .m-widget5__stats1
+                                span.m-widget5__number 10,054
+                                br
+                                span.m-widget5__sales sales
+                              .m-widget5__stats2
+                                span.m-widget5__number 1103
+                                br
+                                span.m-widget5__votes votes
+                        // end::m-widget5
+                      #m_widget5_tab3_content.tab-pane(aria-expanded='false')
+                        // begin::m-widget5
+                        .m-widget5
+                          .m-widget5__item
+                            .m-widget5__content
+                              .m-widget5__pic
+                                img.m-widget7__img(src='assets/app/media/img//products/product10.jpg' alt='')
+                              .m-widget5__section
+                                h4.m-widget5__title
+                                  | Branding Mockup
+                                span.m-widget5__desc
+                                  | Make Metronic Great Again.Lorem Ipsum Amet
+                                .m-widget5__info
+                                  span.m-widget5__author
+                                    | Author:
+                                  span.m-widget5__info-author.m--font-info
+                                    | Fly themes
+                                  span.m-widget5__info-label
+                                    | Released:
+                                  span.m-widget5__info-date.m--font-info
+                                    | 23.08.17
+                            .m-widget5__content
+                              .m-widget5__stats1
+                                span.m-widget5__number 10.054
+                                br
+                                span.m-widget5__sales sales
+                              .m-widget5__stats2
+                                span.m-widget5__number 1103
+                                br
+                                span.m-widget5__votes votes
+                          .m-widget5__item
+                            .m-widget5__content
+                              .m-widget5__pic
+                                img.m-widget7__img(src='assets/app/media/img//products/product11.jpg' alt='')
+                              .m-widget5__section
+                                h4.m-widget5__title
+                                  | Great Logo Designn
+                                span.m-widget5__desc
+                                  | Make Metronic Great Again.Lorem Ipsum Amet
+                                .m-widget5__info
+                                  span.m-widget5__author
+                                    | Author:
+                                  span.m-widget5__info-author.m--font-info
+                                    | Fly themes
+                                  span.m-widget5__info-label
+                                    | Released:
+                                  span.m-widget5__info-date.m--font-info
+                                    | 23.08.17
+                            .m-widget5__content
+                              .m-widget5__stats1
+                                span.m-widget5__number 24,583
+                                br
+                                span.m-widget5__sales sales
+                              .m-widget5__stats2
+                                span.m-widget5__number 3809
+                                br
+                                span.m-widget5__votes votes
+                          .m-widget5__item
+                            .m-widget5__content
+                              .m-widget5__pic
+                                img.m-widget7__img(src='assets/app/media/img//products/product6.jpg' alt='')
+                              .m-widget5__section
+                                h4.m-widget5__title
+                                  | Awesome Mobile App
+                                span.m-widget5__desc
+                                  | Make Metronic Great Again.Lorem Ipsum Amet
+                                .m-widget5__info
+                                  span.m-widget5__author
+                                    | Author:
+                                  span.m-widget5__info-author.m--font-info
+                                    | Fly themes
+                                  span.m-widget5__info-label
+                                    | Released:
+                                  span.m-widget5__info-date.m--font-info
+                                    | 23.08.17
+                            .m-widget5__content
+                              .m-widget5__stats1
+                                span.m-widget5__number 19,200
+                                br
+                                span.m-widget5__sales 1046
+                              .m-widget5__stats2
+                                span.m-widget5__number 1046
+                                br
+                                span.m-widget5__votes votes
+                        // end::m-widget5
+                    // end::Content
+                // end:: Widgets/Best Sellers
+              .col-xl-4
+                // begin:: Widgets/Authors Profit
+                .m-portlet.m-portlet--bordered-semi.m-portlet--full-height
+                  .m-portlet__head
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          | Authors Profit
+                    .m-portlet__head-tools
+                      ul.m-portlet__nav
+                        li.m-portlet__nav-item.m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover')
+                          a.m-portlet__nav-link.m-dropdown__toggle.dropdown-toggle.btn.btn--sm.m-btn--pill.btn-secondary.m-btn.m-btn--label-brand(href='#')
+                            | All
+                          .m-dropdown__wrapper
+                            span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                            .m-dropdown__inner
+                              .m-dropdown__body
+                                .m-dropdown__content
+                                  ul.m-nav
+                                    li.m-nav__section.m-nav__section--first
+                                      span.m-nav__section-text Quick Actions
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-share
+                                        span.m-nav__link-text Activity
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-chat-1
+                                        span.m-nav__link-text Messages
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-info
+                                        span.m-nav__link-text FAQ
+                                    li.m-nav__item
+                                      a.m-nav__link(href='')
+                                        i.m-nav__link-icon.flaticon-lifebuoy
+                                        span.m-nav__link-text Support
+                                    li.m-nav__separator.m-nav__separator--fit
+                                    li.m-nav__item
+                                      a.btn.btn-outline-danger.m-btn.m-btn--pill.m-btn--wide.btn-sm(href='#') Cancel
+                  .m-portlet__body
+                    .m-widget4
+                      .m-widget4__item
+                        .m-widget4__img.m-widget4__img--logo
+                          img(src='assets/app/media/img/client-logos/logo5.png' alt='')
+                        .m-widget4__info
+                          span.m-widget4__title
+                            | Trump Themes
+                          br
+                          span.m-widget4__sub
+                            | Make Metronic Great Again
+                        span.m-widget4__ext
+                          span.m-widget4__number.m--font-brand +$2500
+                      .m-widget4__item
+                        .m-widget4__img.m-widget4__img--logo
+                          img(src='assets/app/media/img/client-logos/logo4.png' alt='')
+                        .m-widget4__info
+                          span.m-widget4__title
+                            | StarBucks
+                          br
+                          span.m-widget4__sub
+                            | Good Coffee &amp; Snacks
+                        span.m-widget4__ext
+                          span.m-widget4__number.m--font-brand -$290
+                      .m-widget4__item
+                        .m-widget4__img.m-widget4__img--logo
+                          img(src='assets/app/media/img/client-logos/logo3.png' alt='')
+                        .m-widget4__info
+                          span.m-widget4__title
+                            | Phyton
+                          br
+                          span.m-widget4__sub
+                            | A Programming Language
+                        span.m-widget4__ext
+                          span.m-widget4__number.m--font-brand +$17
+                      .m-widget4__item
+                        .m-widget4__img.m-widget4__img--logo
+                          img(src='assets/app/media/img/client-logos/logo2.png' alt='')
+                        .m-widget4__info
+                          span.m-widget4__title
+                            | GreenMakers
+                          br
+                          span.m-widget4__sub
+                            | Make Green Great Again
+                        span.m-widget4__ext
+                          span.m-widget4__number.m--font-brand -$2.50
+                      .m-widget4__item
+                        .m-widget4__img.m-widget4__img--logo
+                          img(src='assets/app/media/img/client-logos/logo1.png' alt='')
+                        .m-widget4__info
+                          span.m-widget4__title
+                            | FlyThemes
+                          br
+                          span.m-widget4__sub
+                            | A Let&apos;s Fly Fast Again Language
+                        span.m-widget4__ext
+                          span.m-widget4__number.m--font-brand +$200
+                // end:: Widgets/Authors Profit
+            // End::Section
+
+
+
+block scripts
+  script(src='/js/dashboard.js' type='text/javascript')

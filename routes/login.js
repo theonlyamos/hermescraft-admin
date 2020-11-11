@@ -23,6 +23,7 @@ get((req, res, next)=>{
     })
 }).
 post(async(req, res, next)=>{
+  try {
     passport.authenticate('local', (err, user, info) => {
         if (err) {
             console.log(err)
@@ -55,5 +56,9 @@ post(async(req, res, next)=>{
         });
     
     })(req, res, next);
+  } 
+  catch (error) {
+    console.log(error)
+  }
 })
 module.exports = router;

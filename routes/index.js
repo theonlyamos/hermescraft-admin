@@ -1,10 +1,12 @@
 var express = require('express');
 var Category = require('../models/category.js');
 var Product = require('../models/product');
+const User = require("../models/user");
+const Order = require('../models/order');
 const { PageLink } = require("../models/page");
 var router = express.Router();
 
-const { hermescraftUrl } = require('../config');
+const { hermescraftUrl, hermescraftAdminUrl } = require('../config');
 
 /* GET Admin page. */
 router.
@@ -20,10 +22,22 @@ get(async function(req, res, next) {
     categories[i] = category
   }
   const products = await Product.find({}).populate('images').limit(8).exec();
+  const ordersAggregate = await Order.aggregate([{$group: {_id: null, ordersTotal: {$sum: "$total"}}}])
+  const { ordersTotal } = ordersAggregate[0]
+  const ordersCount = await Order.countDocuments({})
+  let result = await Order.paginate({}, {limit: 15, sort: {createdAt: -1}})
+  const latestOrders = result.docs;
+  const customersCount = await User.countDocuments({role: 'customer'});
+  result = await User.paginate({role: 'customer'}, {limit: 15, sort: {createdAt: -1}});
+  const newCustomers = result.docs;
+  const productsCount = await Product.countDocuments({});
   res.render('index', { title: 'HermesCraft || Admin',
                         categories: categories,
                         products: products,
-                        hermescraftUrl
+                        hermescraftUrl, hermescraftAdminUrl,
+                        ordersCount, latestOrders,
+                        ordersTotal, customersCount,
+                        newCustomers, productsCount
   });
 });
 
