@@ -41,7 +41,8 @@ router
                           customers, totalDocs, pagingCounter,
                           totalPages, limit, currentPage,
                           hermescraftUrl, message, 
-                          msgTitle, error, errMsg
+                          msgTitle, error, errMsg,
+                          user: req.user
 
     })
   }

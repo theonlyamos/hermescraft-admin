@@ -68,7 +68,8 @@ route('/')
                         currentPage,
                         view: req.session.products_view,
                         hermescraftUrl,
-                        message: message
+                        message: message,
+                        user: req.user
   });
 })
 
@@ -90,7 +91,8 @@ route('/add')
   delete(req.session.errMsg)
   res.render('add_product', { title: 'HermesCraft || Add Product',
                                     categories: categories,
-                                    error, errMsg, hermescraftUrl
+                                    error, errMsg, hermescraftUrl,
+                              user: req.user
   });
 }).
 post(async(req, res, next)=>{
@@ -232,7 +234,8 @@ route('/:productId')
   return res.render('product', {title: `Product - ${newdoc.name}`,
                                       product: newdoc,
                                       categories: categories,
-                                      hermescraftUrl
+                                      hermescraftUrl,
+                                      user: req.user
                     })
 })
 

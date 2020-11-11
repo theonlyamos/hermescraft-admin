@@ -34,7 +34,8 @@ get(async function(req, res, next) {
   res.render('pages', { title: 'Administrator || Pages',
                               categories, pages, error,
                               errMsg, msgTitle, message,
-                              hermescraftUrl
+                              hermescraftUrl,
+                              user: req.user
   });
 });
 
@@ -51,7 +52,9 @@ get(async(req, res, next)=>{
     categories[i] = category
   }
   return res.render('add_page', {title: 'HermesCraft || Add Page',
-                                  categories,hermescraftUrl})
+                                  categories,hermescraftUrl,
+                                  user: req.user
+  })
 }).
 post(async(req, res, next)=>{
   let banner;
@@ -71,9 +74,11 @@ post(async(req, res, next)=>{
           categories[i] = category
         }
         return res.render('add_page', {title: 'HermesCraft || Add Page',
-                                                error: true,
-                                                errMsg: "Image upload unsuccessful",
-                                                categories: categories})
+                                        error: true,
+                                        errMsg: "Image upload unsuccessful",
+                                        categories: categories,
+                                        user: req.user
+        })
       }
       
       banner = await PageImage.create({
@@ -322,7 +327,9 @@ post(async(req, res, next)=>{
         return res.render('add_page', {title: 'HermesCraft || Add Product',
                                                 error: true,
                                                 errMsg: "Image upload unsuccessful",
-                                                categories: categories})
+                                                categories: categories,
+                                                user: req.user
+        })
       }
       
       banner = await PageImage.create({
@@ -402,7 +409,8 @@ route('/:pageId')
                               page, categories,
                               hermescraftUrl,
                               error, errMsg,
-                              msgTitle, message
+                              msgTitle, message,
+                              user: req.user
                     })
 })
 

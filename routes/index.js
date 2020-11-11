@@ -31,6 +31,7 @@ get(async function(req, res, next) {
   result = await User.paginate({role: 'customer'}, {limit: 15, sort: {createdAt: -1}});
   const newCustomers = result.docs;
   const productsCount = await Product.countDocuments({});
+  console.log(req.user)
   res.render('index', { title: 'HermesCraft || Admin',
                         categories: categories,
                         products: products,
