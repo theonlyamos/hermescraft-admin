@@ -11,22 +11,22 @@ block content
         .la.la-home
         i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
       span.s-text16
-        | Customers
+        | Coupons
 
     // Content page
     section.p-t-55.p-b-65
       .container
-        // customers 
+        // coupons 
         .m-portlet.m-portlet--mobile.m-portlet--unair
           .m-portlet__head.d-flex.justify-content-between.align-items-center
             .m-portlet__head-caption
               .m-portlet__head-title
                 h3.m-portlet__head-text
-                  | Customers
+                  | Coupons
             .toolbar
-              a.btn.btn-clear.btn-outline-dark.btn-lg.rounded-pill(href="/customers/add")
+              a.btn.btn-clear.btn-outline-dark.btn-lg.rounded-pill(href="/coupons/add")
                 i.fas.fa-user-plus.fa-fw
-                small.ml-2 Add Customer
+                small.ml-2 Add Coupon
           .m-portlet__body
             table.table.table-striped.table-hover#m_table_1
               thead.m-datatable__head.bg-dark
@@ -39,21 +39,21 @@ block content
                   th Name
                   th Email
                   th Date
-                  th Orders
+                  th Coupons
                   th Actions
               tbody
-                each customer in customers
-                  tr.s-text15(id=customer._id)
+                each coupon in coupons
+                  tr.s-text15(id=coupon._id)
                     td
-                      label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="check_"+customer._id)
-                        input(type="checkbox" id="check_"+customer._id)
+                      label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="check_"+coupon._id)
+                        input(type="checkbox" id="check_"+coupon._id)
                         span
                     td
-                      img(src=hermescraftUrl+"images/icons/icon-header-01.png" alt=customer.username style="width: 40px; height: auto; object-fit: cover")
-                    td #{customer.first_name} #{customer.last_name}
-                    td #{customer.username}
-                    td #{new Date(customer.createdAt).toUTCString()}
-                    td #{customer.orders}
+                      img(src=hermescraftUrl+"images/icons/icon-header-01.png" alt=coupon.username style="width: 40px; height: auto; object-fit: cover")
+                    td #{coupon.first_name} #{coupon.last_name}
+                    td #{coupon.username}
+                    td #{new Date(coupon.createdAt).toUTCString()}
+                    td #{coupon.coupons}
                     td
                       .m-portlet__head-tools
                           ul.m-portlet__nav
@@ -71,12 +71,12 @@ block content
                                             span.m-nav__section-text Quick Actions
                                           li.m-nav__item
                                             a.m-nav__link(href='')
-                                              i.m-nav__link-icon.flaticon-customer
-                                              span.m-nav__link-text Update Customer
+                                              i.m-nav__link-icon.flaticon-coupon
+                                              span.m-nav__link-text Update Coupon
                                           li.m-nav__item
                                             a.m-nav__link(href='')
                                               i.m-nav__link-icon.fas.fa-user-minus.fa-fw 
-                                              span.m-nav__link-text Delete Customer
+                                              span.m-nav__link-text Delete Coupon
                       
                       //
                         .dropdown
@@ -84,7 +84,7 @@ block content
                             i.fas.fa-ellipsis-v
                           .dropdown-menu
                             ul.nav
-                              li.nav-item.border-bottom.w-100
+                              li.nav-item.bcoupon-bottom.w-100
                                 a.nav-link.text-primary.py-1(href='#') 
                                   i.fas.fa-user-cog.fa-fw
                                   small.pl-1 Update User
@@ -97,9 +97,9 @@ block content
           .pagination.flex-m.flex-w.p-t-26.justify-content-center
             each _, i in Array(totalPages)
               if (parseInt(i)+1 == currentPage)
-                a.item-pagination.flex-c-m.trans-0-4.active-pagination(href="/customers?view=table&page="+(parseInt(i)+1)) #{i+1}
+                a.item-pagination.flex-c-m.trans-0-4.active-pagination(href="/coupons?view=table&page="+(parseInt(i)+1)) #{i+1}
               else
-                a.item-pagination.flex-c-m.trans-0-4(href="/customers?view=table&page="+(parseInt(i)+1)) #{i+1}
+                a.item-pagination.flex-c-m.trans-0-4(href="/coupons?view=table&page="+(parseInt(i)+1)) #{i+1}
 
 block scripts
   if (message)
@@ -107,7 +107,7 @@ block scripts
         swal("Success", "#{message}", "success");
 
   // ===============================================================================================
-  script(src="/js/customers.js")
+  script(src="/js/coupons.js")
   // ===============================================================================================
 
   // ===============================================================================================

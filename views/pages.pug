@@ -17,43 +17,13 @@ block content
     // Content page
     section.bgwhite.p-t-55.p-b-65
       .container
-        .d-flex.justify-content-end
-          if (view == 'grid')
-            a.btn.btn-clear.border-primary.rounded-0(href="/products")
-                i.fa.fa-th.text-danger
-          else
-            a.btn.btn-clear.border.rounded-0(href="/products")
-                i.fa.fa-th
-          if (view == 'table')
-            a.btn.btn-clear.border-primary.rounded-0.mx-2(href="?view=table")
-              i.fa.fa-list.text-danger
-          else
-            a.btn.btn-clear.border.rounded-0.mx-2(href="?view=table")
-              i.fa.fa-list
-          a.btn.btn-clear.border.rounded-0(href="/pages/add")
+        .d-flex.justify-content-between
+          h3.m-subheader__title Pages
+          a.btn.btn-clear.btn-outline-dark.btn-lg.rounded-pill(href="/pages/add")
             i.fa.fa-plus.fa-fw
             small Add Page
-        .flex-sb-m.flex-w.p-b-35
-          .flex-w
-            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
-              select.custom-select.border-0.s-text7.w-100(name="sorting" onchange="filterByCategory(this)")
-                option.text-secondary.s-text7(value="all") Sort by category
-                  each category in categories
-                    option.text-secondary.s-text7(value=category.shortName) #{category.name}
-            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
-              select.custom-select.border-0.s-text7.w-100(name="sorting")
-                option.text-secondary.s-text7 Price
-                option.text-secondary.s-text7 $0.00 - $50.00
-                option.text-secondary.s-text7 $50.00 - $100.00
-                option.text-secondary.s-text7 $100.00 - $150.00
-                option.text-secondary.s-text7 $150.00 - $200.00
-                option.text-secondary.s-text7 $200.00+
-            .bo4.of-hidden.w-size12.m-t-5.m-b-5.m-r-10
-              input.form-control.border-0.s-text7.w-100(type="search" name="search" placeholder="Search")
-          span.s-text8.p-t-5.p-b-5
-            | Showing 1–#{pages.length < 20 ? pages.length : 20} of #{pages.length} results
-        
-        .row
+       
+        .row.mt-5
           each page in pages
             .col-sm-10.col-md-8.col-lg-3
               // block1

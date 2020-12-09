@@ -27,25 +27,42 @@ block content
         | Products
 
     // Content page
-    section.p-t-55.p-b-65
+    section.p-t-55.p-b-65.bg-light
       .container
-        .d-flex.justify-content-end
-          if (view == 'grid')
-            a.btn.btn-clear.border-primary.rounded-0(href="/products?view=grid")
-                i.flaticon-squares-1.text-danger
-          else
-            a.btn.btn-clear.border.rounded-0(href="/products?view=grid")
-                i.flaticon-squares-1
-          if (view == 'table')
-            a.btn.btn-clear.border-primary.rounded-0(href="/products?view=table")
-                i.fa.fa-list.text-danger
-          else
-             a.btn.btn-clear.border.rounded-0.mx-2(href="/products?view=table")
-              i.fa.fa-list
-            
-          a.btn.btn-clear.border.rounded-0(href="/products/add")
-            i.flaticon-add-circular-button 
-            small Add Product
+        //
+          .m-grid__item.m-grid__item--fluid.m-wrapper
+            // BEGIN: Subheader
+            .m-subheader.mb-5
+              .d-flex.align-items-center
+                .mr-auto
+                  h3.m-subheader__title Products
+                div
+                  span#m_dashboard_daterangepicker.m-subheader__daterange.rounded-0
+                    span.m-subheader__daterange-label
+                      span.m-subheader__daterange-title
+                      span.m-subheader__daterange-date.m--font-brand
+                    a.btn.btn-sm.btn-primary.m-btn.m-btn--icon.m-btn--icon-only.m-btn--custom.m-btn--square(href='#')
+                      i.la.la-angle-down
+        if (view == 'grid')
+          .d-flex.justify-content-between
+            h3.m-subheader__title Products
+            .toolbar
+              if (view == 'grid')
+                a.btn.btn-clear.btn-lg.btn-danger.border-danger.mx-1(href="/products?view=grid")
+                    i.flaticon-squares-1
+              else
+                a.btn.btn-clear.btn-lg.btn-outline-danger.border.mx-1(href="/products?view=grid")
+                    i.flaticon-squares-1.text-dark
+              if (view == 'table')
+                a.btn.btn-clear.btn-lg.btn-danger.border-danger.mx-1(href="/products?view=table")
+                    i.fa.fa-list
+              else
+                a.btn.btn-clear.btn-lg.btn-outline-danger.border.mx-2.mx-1(href="/products?view=table")
+                  i.fa.fa-list.text-dark
+                
+              a.btn.btn-clear.btn-outline-dark.btn-lg.rounded-pill(href="/products/add")
+                i.flaticon-add-circular-button 
+                small Add Product
         if (view == 'grid')
           .flex-sb-m.flex-w.p-b-35
             .flex-w
@@ -108,11 +125,29 @@ block content
         
         else 
           .m-portlet.m-portlet--mobile.m-portlet--unair
-            .m-portlet__head
+            //
+            .m-portlet__head.d-flex.justify-content-between.align-items-center
               .m-portlet__head-caption
                 .m-portlet__head-title
                   h3.m-portlet__head-text
                     | Products
+              .toolbar
+                if (view == 'grid')
+                  a.btn.btn-clear.btn-lg.btn-danger.border-danger.mx-1(href="/products?view=grid")
+                      i.flaticon-squares-1
+                else
+                  a.btn.btn-clear.btn-lg.btn-outline-danger.border.mx-1(href="/products?view=grid")
+                      i.flaticon-squares-1.text-dark
+                if (view == 'table')
+                  a.btn.btn-clear.btn-lg.btn-danger.border-danger.mx-1(href="/products?view=table")
+                      i.fa.fa-list
+                else
+                  a.btn.btn-clear.btn-lg.btn-outline-danger.border.mx-2.mx-1(href="/products?view=table")
+                    i.fa.fa-list.text-dark
+                  
+                a.btn.btn-clear.btn-outline-dark.btn-lg.rounded-pill(href="/products/add")
+                  i.flaticon-add-circular-button 
+                  small Add Product
             .m-portlet__body
               table.table.table-striped.table-hover#m_table_1
                 thead.bg-dark

@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 const config = require('./config');
+const { SiteInfo, SiteContact  } = require('./models/settings');
+const { Page, PageSection, PageText, PageImage, CarouselImage, PageCarouselItem, PageLink } = require('./models/page');
+const Category = require('./models/category');
+const { hermescraftUrl } = require('./config');
+
 var connect = mongoose.connect(config.mongoUrI, {useNewUrlParser: true,
                                                     useUnifiedTopology: true});
 
@@ -9,8 +14,56 @@ connect.then((db) => {
   console.log(err);
 })
 
-const { Page, PageSection, PageText, PageImage, CarouselImage, PageCarouselItem, PageLink } = require('./models/page');
-const Category = require('./models/category');
+const siteSetup = async()=>{
+    try{
+        const ContactModels = [
+            new SiteContact({
+                type: 'phone',
+                text: '+233-557-821-030',
+                url: 'tel:+233557821030'
+            }),
+            new SiteContact({
+                type: 'phone',
+                text: '+233-557-821-030',
+                url: 'tel:+233557821030'
+            }),
+            new SiteContact({
+                type: 'email',
+                text: 'info@hermescraft.com',
+                url: 'mailto: info@hermescraft.com'
+            })
+        ]
+
+        const FaviconModel = new PageImage({
+            name: 'favicon.ico',
+            path: 'images/icons/favicon.ico'
+        })
+
+        const LogoModel = new PageImage({
+            name: 'hermescraft-2.png',
+            path: 'images/icons/hermescraft-2.png'
+        })
+
+        let contacts = await SiteContact.create(ContactModels);
+        contacts = contacts.map((c, i)=>c._id);
+        const favicon = await PageImage.create(FaviconModel);
+        const logo = await PageImage.create(LogoModel);
+
+        const SettingsModel = new SiteInfo({
+            name: 'Hermescraft',
+            url: hermescraftUrl,
+            favicon: favicon._id,
+            logo: logo._id,
+            contacts: contacts 
+        })
+
+        const settings = await SiteInfo.create(SettingsModel);
+        console.log(settings)
+    }
+    catch(error){
+        console.log(error)
+    }
+}
 
 const createCategories = async()=>{
   try {
@@ -488,13 +541,14 @@ const getAboutPage = async()=>{
 
 const runScript = async()=>{
   try {
-      //await resetHomePage()
+    await siteSetup()
+    //await resetHomePage()
     //await resetAboutPage()
-    await createCategories();
-    await createPages();
-    await createHomeCarousel();
-    await createHomeSections();
-    await createAboutSections();
+    //await createCategories();
+    //await createPages();
+    //await createHomeCarousel();
+    //await createHomeSections();
+    //await createAboutSections();
     //await getCategories();
     //await getHomePage();
     //await getAboutPage();

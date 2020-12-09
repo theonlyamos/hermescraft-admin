@@ -2,7 +2,13 @@ extends layout
 
 block content
   .container1-page.bg-light
-    // Content page
+    // breadcrumb
+    .bread-crumb.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
+      a.s-text15(href="/")
+        .la.la-home
+        i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+      span.s-text16
+        | Dashboard
     section.p-t-55.p-b-65
       .container
         .m-grid__item.m-grid__item--fluid.m-wrapper
