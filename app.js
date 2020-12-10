@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+const debug = require('./debugger');
 var express = require('express');
 var session = require('express-session')
 var FileStore = require('session-file-store')(session)
@@ -7,6 +8,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport = require('passport');
+const compression = require('compression');
+const helmet = require('helmet');
 const { isAdmin } = require('./authorize');
 var config = require('./config');
 var connectEnsureLoggedIn = require('connect-ensure-login');
@@ -22,6 +25,9 @@ var ProductsRouter = require('./routes/products');
 var OrdersRouters = require('./routes/orders');
 var CustomersRouter = require('./routes/customers');
 var AdministratorsRouter = require('./routes/administrators');
+const CouponsRouter = require('./routes/coupons');
+const AccountRouter = require('./routes/account');
+const SettingsRouter = require('./routes/settings');
 
 var app = express();
 
@@ -33,6 +39,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//app.use(helmet());
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
@@ -66,6 +75,9 @@ app.use('/products', ProductsRouter);
 app.use('/orders', OrdersRouters);
 app.use('/customers', CustomersRouter);
 app.use('/administrators', AdministratorsRouter);
+app.use('/coupons', CouponsRouter);
+app.use('/account', AccountRouter);
+app.use('/settings', SettingsRouter);
 
 var connect = mongoose.connect(config.mongoUrI, 
                                 { useNewUrlParser: true,
@@ -73,9 +85,9 @@ var connect = mongoose.connect(config.mongoUrI,
                                 });
 
 connect.then((db) => {
-  console.log('Connected to database');
+  debug.log('Connected to database');
 },(err) => {
-  console.log(err);
+  debug.error(err.message);
 })
 
 

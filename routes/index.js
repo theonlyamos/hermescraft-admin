@@ -1,6 +1,7 @@
 var express = require('express');
 var Category = require('../models/category.js');
 var Product = require('../models/product');
+const debug = require('../debugger');
 const User = require("../models/user");
 const Order = require('../models/order');
 const { PageLink } = require("../models/page");
@@ -31,7 +32,6 @@ get(async function(req, res, next) {
   result = await User.paginate({role: 'customer'}, {limit: 15, sort: {createdAt: -1}});
   const newCustomers = result.docs;
   const productsCount = await Product.countDocuments({});
-  console.log(req.user)
   res.render('index', { title: 'HermesCraft || Admin',
                         categories: categories,
                         products: products,
@@ -44,6 +44,7 @@ get(async function(req, res, next) {
 });
 
 router.get('/logout', async (req, res, next) => {
+  debug.log(`[Admin Logout] ${req.user.username}: ${new Date()}`)
   req.session.destroy();
   res.clearCookie();
   res.redirect('/login')

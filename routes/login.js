@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const debug = require('../debugger');
 const Cart = require('../models/cart');
 const router = express.Router();
 
@@ -26,7 +27,7 @@ post(async(req, res, next)=>{
   try {
     passport.authenticate('local', (err, user, info) => {
         if (err) {
-            console.log(err)
+            debug.error(err)
             return res.redirect('/login')
         }
     
@@ -37,9 +38,10 @@ post(async(req, res, next)=>{
         }
         req.logIn(user, async function(err) {
           if (err) {
-                console.log(err)
+                debug.error(err)
                 return res.redirect('/login')
           }
+          debug.success(`[Admin Login]: ${user.username} ${new Date()}`)
           let cart = await Cart.findOne({"user": req.user._id}).exec()
           if (cart){
             req.session.cart = cart.items
@@ -50,7 +52,7 @@ post(async(req, res, next)=>{
                 items: req.session.cart
               })
           
-              await cart.save().catch((error)=>console.log(error))
+              await cart.save().catch((error)=>debug.log(error))
           }
           return res.redirect('/');
         });
@@ -58,7 +60,7 @@ post(async(req, res, next)=>{
     })(req, res, next);
   } 
   catch (error) {
-    console.log(error)
+    debug.error(error)
   }
 })
 module.exports = router;

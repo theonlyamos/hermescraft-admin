@@ -44,7 +44,7 @@ const PageSectionSchema = new Schema({
 const PageSchema = new Schema({
     name: {type: String, required: true},
     description: {type: String},
-    keywords: [{type: String}],
+    keywords: {type: String},
     title: {type: String, required: true},
     icon: {type: String, required: true},
     path: {type: String, required: true},
