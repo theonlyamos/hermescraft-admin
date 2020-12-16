@@ -57,7 +57,7 @@ route('/')
     categories[i] = category
   }
   const message = req.session.message
-  req.session.message = undefined
+  req.session.message = ""
   res.render('products', { title: 'HermesCraft || Products',
                         categories,
                         products,

@@ -4,19 +4,7 @@ block styles
   link(rel="stylesheet" type="text/css" href="/vendor/datatables/datatables.bundle.css")
 
 block content
-  // Confirm Delete Modal
-  .modal.fade#confirm_delete_modal(tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalTitle" aria-hidden="true")
-    .modal-dialog.modal-dialog-centered(role="document")
-      .modal-content
-        .modal-header.bg-danger
-          h3.modal-title.text-white#confirmDeleteModalTitle(style="font-weight: 700") Delete Product
-          button.close(type="button" data-dismiss="modal" aria-label="Close")
-            span(aria-hidden="true") &times;
-        .modal-body
-          p Are you sure you want to delete #[b.product_name ]?
-        .modal-footer
-          button.btn.btn-secondary.text-secondary(type="button" data-dismiss="modal") Close
-          button.btn.btn-danger(type="submit") Delete
+  include includes/delete_modal.pug
   .container1-page.bg-light
     // breadcrumb
     .bread-crumb.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
@@ -195,7 +183,7 @@ block content
                                               i.m-nav__link-icon.flaticon-edit
                                               span.m-nav__link-text Update Product
                                           li.m-nav__item
-                                            a.m-nav__link(href="#confirm_delete_modal" data-toggle="modal" data-product=product.name data-url="/products/delete/"+product._id)
+                                            a.m-nav__link.block2-btn-delete(href="#confirm_delete_modal" data-toggle="modal" data-product=product.name data-url="/products/delete/"+product._id)
                                               i.m-nav__link-icon.flaticon-delete
                                               span.m-nav__link-text Delete Product
                 
@@ -213,7 +201,7 @@ block scripts
         }
         $("#confirm_delete_modal").modal("show")
         const modal = $("#confirm_delete_modal");
-        modal.find('.product_name').html(product);
+        modal.find('.name').html(product);
         modal.find(".modal-footer button[type='submit']").attr('onclick', `window.location.href='${url}'`)
         e.stopPropagation()
       });

@@ -75,6 +75,22 @@ var handleFiles = function(e, slick=false) {
         })(img);
         reader.readAsDataURL(file);
       }
+
+      else if (target.startsWith('profileImage')){
+        const container = document.querySelector(".m-card-profile__pic-wrapper")
+        const img = document.createElement("img")
+
+        const reader = new FileReader();
+        reader.onload = (function (acontainer, img) {
+            return function (e) {
+              img.setAttribute('src', e.target.result);
+              acontainer.innerHTML = ""
+              acontainer.appendChild(img)
+            };
+        })(container, img);
+        reader.readAsDataURL(file);
+      }
+
       else {
           const thumbnail = document.querySelector(`#${slick} .wrap-pic-w img`);
           const activeSlick =  document.querySelector('.slick-active img');

@@ -32,6 +32,16 @@ var Dashboard = function () {
     }
   }
 }();
+
+const uploadProfileImage = async (e)=>{
+  try {
+    handleFiles(e)
+    $("#profileImageForm").submit()
+  } 
+  catch (error) {
+    console.log(error)
+  }
+}
 jQuery(document).ready(function () {
   Dashboard.init()
 });

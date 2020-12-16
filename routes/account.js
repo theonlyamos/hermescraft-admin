@@ -1,10 +1,8 @@
-var express = require('express');
-var Category = require('../models/category.js');
-var Product = require('../models/product');
+const express = require('express');
+const path = require("path");
 const debug = require('../debugger');
 const User = require("../models/user");
-const Order = require('../models/order');
-const { PageLink } = require("../models/page");
+const UserImage = require('../models/user-image');
 var router = express.Router();
 
 const { hermescraftUrl, hermescraftAdminUrl } = require('../config');
@@ -12,41 +10,75 @@ const { hermescraftUrl, hermescraftAdminUrl } = require('../config');
 router.
 route('/').
 get(async function(req, res, next) {
-  const categories = await Category.find({}).populate('image')
-                                  .exec().catch((error)=>console.log(error))
-  for (let i = 0; i < categories.length; i++){
-    const category = categories[i]
-    const link = await PageLink.findById(category.link).populate('text')
-                                .exec().catch((error)=>console.log(error))
-    category.link = link
-    categories[i] = category
-  }
-  const products = await Product.find({}).populate('images').limit(8).exec();
-  const ordersAggregate = await Order.aggregate([{$group: {_id: null, ordersTotal: {$sum: "$total"}}}])
-  const ordersTotal = ordersAggregate.length ? ordersAggregate[0].ordersTotal : 0
-  const ordersCount = await Order.countDocuments({})
-  let result = await Order.paginate({}, {limit: 15, sort: {createdAt: -1}})
-  const latestOrders = result.docs;
-  const customersCount = await User.countDocuments({role: 'customer'});
-  result = await User.paginate({role: 'customer'}, {limit: 15, sort: {createdAt: -1}});
-  const newCustomers = result.docs;
-  const productsCount = await Product.countDocuments({});
-  res.render('settings', { title: 'HermesCraft || Settings',
-                        categories: categories,
-                        products: products,
-                        hermescraftUrl, hermescraftAdminUrl,
-                        ordersCount, latestOrders,
-                        ordersTotal, customersCount,
-                        newCustomers, productsCount,
-                        user: req.user
-  });
-});
+  try {
+    const user = await User.findById(req.user._id).populate('image')
 
-router.get('/logout', async (req, res, next) => {
-  debug.log(`[Admin Logout] ${req.user.username}: ${new Date()}`)
-  req.session.destroy();
-  res.clearCookie();
-  res.redirect('/login')
-});
+    const message = req.session.message
+    const error = req.session.error
+    const errMsg = req.session.errMsg
+
+    req.session.message = ""
+    req.session.error = false
+    req.session.errMsg = ""
+    res.render('account', { title: 'HermesCraft || Account',
+                          hermescraftUrl, hermescraftAdminUrl,
+                          user, message, error, errMsg
+    });
+  } 
+  catch (error) {
+    debug.error(error)
+    res.redirect('/')
+  }
+})
+.post(async(req, res, next)=>{
+  try {
+    const user = await User.findOneAndUpdate({_id: req.user._id}, req.body)
+    req.session.message = 'Account info updated successfully'
+  } 
+  catch (error) {
+    debug.error(error)
+    req.session.error = true
+    req.session.errMsg = "Error updating account info"
+  }
+
+  res.redirect('/account')
+})
+
+router.
+route('/upload').
+post(async(req, res, next)=>{
+  try {
+    let imageFile = req.files.image
+    let imageName = imageFile.name
+    imageName = req.body.account+ "." + imageName.split(".")[imageName.split(".").length - 1]
+    debug.log(imageName)
+    const err = await imageFile.mv(path.resolve(__dirname, '..', '..', 'hermescraft', 'public', 'images', 'users', imageName))
+    if (err){
+      debug.error(err)
+      req.error = true
+      req.errMsg = "Image upload unsuccessful"
+
+      return res.redirect('/account')
+    }
+
+    const image = await UserImage.create(new UserImage({
+      user: req.body.account,
+      name: imageName,
+      path: `/images/users/${imageName}`
+    }))
+
+    const user = await User.findOneAndUpdate({_id: req.body.account}, {image: image._id})
+
+    req.user = user
+    req.session.message = "Account Image updated successfully"
+  } 
+  catch (error) {
+    debug.error(error)
+    req.error = true
+    req.errMsg = "Image upload unsuccessful"
+  }
+
+  res.redirect('/account')
+})
 
 module.exports = router;

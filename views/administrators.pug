@@ -4,6 +4,7 @@ block styles
   link(rel="stylesheet" type="text/css" href="/vendor/datatables/datatables.bundle.css")
 
 block content
+  include includes/delete_modal.pug
   .container1-page.bg-light
     // breadcrumb
     .bread-crumb.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
@@ -47,7 +48,10 @@ block content
                         input(type="checkbox" id="check_"+administrator._id)
                         span
                     td
-                      img(src=hermescraftUrl+"images/icons/icon-header-01.png" alt=administrator.username style="width: 40px; height: auto; object-fit: cover")
+                      if (administrator.image.name)
+                        img(src=hermescraftUrl+"images/users/"+administrator.image.name alt=administrator.username style="width: 40px; height: auto; object-fit: cover")
+                      else
+                        i.fas.fa-user-shield.fa-3x.fa-fw
                     td #{administrator.first_name} #{administrator.last_name}
                     td #{administrator.username}
                     td #{new Date(administrator.createdAt).toUTCString()}
@@ -67,11 +71,11 @@ block content
                                           li.m-nav__section.m-nav__section--first
                                             span.m-nav__section-text Quick Actions
                                           li.m-nav__item
-                                            a.m-nav__link(href='')
-                                              i.m-nav__link-icon.flaticon-administrator
+                                            a.m-nav__link(href='/administrators/'+administrator._id)
+                                              i.m-nav__link-icon.flaticon-profile-1.fa-fw
                                               span.m-nav__link-text Update Administrator
                                           li.m-nav__item
-                                            a.m-nav__link(href='')
+                                            a.m-nav__link(href="#confirm_delete_modal" data-toggle="modal" data-administrator=administrator.username data-url="/administrators/update?action=delete&administrator="+administrator._id).block2-btn-delete
                                               i.m-nav__link-icon.fas.fa-user-minus.fa-fw 
                                               span.m-nav__link-text Delete Administrator
                       
@@ -102,7 +106,19 @@ block scripts
   if (message)
     script(type="text/javascript").
         swal("Success", "#{message}", "success");
+  script(type="text/javascript").
+      $('.block2-btn-delete').on('click', function(e){
+        const button = $(this)
+        const administrator = $(button).data('administrator');
+        const url = $(button).data('url');
 
+        $("#confirm_delete_modal").modal("show")
+        const modal = $("#confirm_delete_modal");
+        modal.find('.name').html(administrator);
+        modal.find(".modal-footer button[type='submit']").attr('onclick', `window.location.href='${url}'`)
+        e.preventDefault();
+        e.stopPropagation();
+      });
   // ===============================================================================================
   script(src="/js/products.js")
   // ===============================================================================================

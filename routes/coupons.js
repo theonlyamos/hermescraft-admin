@@ -4,6 +4,7 @@ var Product = require('../models/product');
 const debug = require('../debugger');
 const User = require("../models/user");
 const Order = require('../models/order');
+//const Couponse = require('../models/coupon');
 const { PageLink } = require("../models/page");
 var router = express.Router();
 
@@ -21,32 +22,10 @@ get(async function(req, res, next) {
     category.link = link
     categories[i] = category
   }
-  const products = await Product.find({}).populate('images').limit(8).exec();
-  const ordersAggregate = await Order.aggregate([{$group: {_id: null, ordersTotal: {$sum: "$total"}}}])
-  const ordersTotal = ordersAggregate.length ? ordersAggregate[0].ordersTotal : 0
-  const ordersCount = await Order.countDocuments({})
-  let result = await Order.paginate({}, {limit: 15, sort: {createdAt: -1}})
-  const latestOrders = result.docs;
-  const customersCount = await User.countDocuments({role: 'customer'});
-  result = await User.paginate({role: 'customer'}, {limit: 15, sort: {createdAt: -1}});
-  const newCustomers = result.docs;
-  const productsCount = await Product.countDocuments({});
-  res.render('settings', { title: 'HermesCraft || Settings',
+  res.render('coupons', { title: 'HermesCraft || Coupons',
                         categories: categories,
-                        products: products,
-                        hermescraftUrl, hermescraftAdminUrl,
-                        ordersCount, latestOrders,
-                        ordersTotal, customersCount,
-                        newCustomers, productsCount,
                         user: req.user
   });
-});
-
-router.get('/logout', async (req, res, next) => {
-  debug.log(`[Admin Logout] ${req.user.username}: ${new Date()}`)
-  req.session.destroy();
-  res.clearCookie();
-  res.redirect('/login')
 });
 
 module.exports = router;

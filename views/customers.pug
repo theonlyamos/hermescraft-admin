@@ -49,7 +49,10 @@ block content
                         input(type="checkbox" id="check_"+customer._id)
                         span
                     td
-                      img(src=hermescraftUrl+"images/icons/icon-header-01.png" alt=customer.username style="width: 40px; height: auto; object-fit: cover")
+                      if (customer.image.name)
+                        img(src=hermescraftUrl+"images/users/"+customer.image.name alt=customer.username style="width: 40px; height: auto; object-fit: cover")
+                      else
+                        i.fas.fa-user.fa-3x.fa-fw
                     td #{customer.first_name} #{customer.last_name}
                     td #{customer.username}
                     td #{new Date(customer.createdAt).toUTCString()}
@@ -70,11 +73,11 @@ block content
                                           li.m-nav__section.m-nav__section--first
                                             span.m-nav__section-text Quick Actions
                                           li.m-nav__item
-                                            a.m-nav__link(href='')
+                                            a.m-nav__link(href='/customers/'+customer._id)
                                               i.m-nav__link-icon.flaticon-customer
                                               span.m-nav__link-text Update Customer
                                           li.m-nav__item
-                                            a.m-nav__link(href='')
+                                            a.m-nav__link(href="#confirm_delete_modal" data-toggle="modal" data-customer=customer.username data-url="/customers/update?action=delete&customer="+customer._id).block2-btn-delete
                                               i.m-nav__link-icon.fas.fa-user-minus.fa-fw 
                                               span.m-nav__link-text Delete Customer
                       
@@ -107,7 +110,7 @@ block scripts
         swal("Success", "#{message}", "success");
 
   // ===============================================================================================
-  script(src="/js/customers.js")
+  //script(src="/js/customers.js")
   // ===============================================================================================
 
   // ===============================================================================================
