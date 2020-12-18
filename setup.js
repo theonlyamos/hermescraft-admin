@@ -181,14 +181,14 @@ const createPages = async()=>{
       new Page({
         name: "About",
         title: "Hermescraft || About Us",
-        path: "/",
+        path: "/about",
         icon: "exclamation",
         header: "About Us"
       }),
       new Page({
         name: "Contact",
         title: "Hermescraft || Contact Us",
-        path: "/",
+        path: "/contact",
         icon: "phone",
         header: "Contact Us"
       })
@@ -541,14 +541,14 @@ const getAboutPage = async()=>{
 
 const runScript = async()=>{
   try {
-    await siteSetup()
+    //await siteSetup()
     //await resetHomePage()
     //await resetAboutPage()
-    //await createCategories();
-    //await createPages();
-    //await createHomeCarousel();
-    //await createHomeSections();
-    //await createAboutSections();
+    await createCategories();
+    await createPages();
+    await createHomeCarousel();
+    await createHomeSections();
+    await createAboutSections();
     //await getCategories();
     //await getHomePage();
     //await getAboutPage();

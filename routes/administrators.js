@@ -16,7 +16,7 @@ router
 .get(async(req, res, next)=>{
   try {
     let page = req.query.page ? req.query.page : 1
-    const result = await User.paginate({role: "administrator"}, {page: page, limit: 10})
+    const result = await User.paginate({role: "administrator"}, {page: page, limit: 10, populate: 'image'})
     
 		const administrators = result.docs
     const totalDocs = result.totalDocs
@@ -35,11 +35,12 @@ router
     req.session.error = undefined
     req.session.errMsg = undefined
 
+    const user = await User.findById(req.user._id).populate('image')
     res.render('administrators', { title: 'HermesCraft || Administrators',
                           hermescraftUrl, message, administrators,
                           msgTitle, error, errMsg, totalDocs,
 													pagingCounter, totalPages, limit, currentPage,
-                          user: req.user
+                          user
 
     })
   }
@@ -89,9 +90,11 @@ get(async function(req, res, next) {
     req.session.message = ""
     req.session.error = false
     req.session.errMsg = ""
+
+    const user = await User.findById(req.user._id).populate('image')
     res.render('administrator', { title: 'HermesCraft || Account',
                           hermescraftUrl, hermescraftAdminUrl,
-                          user: req.use, message, error, errMsg,
+                          user, message, error, errMsg,
                           administrator
     });
   } 

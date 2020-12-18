@@ -22,9 +22,11 @@ get(async function(req, res, next) {
     category.link = link
     categories[i] = category
   }
+
+  const user = await User.findById(req.user._id).populate('image')
   res.render('coupons', { title: 'HermesCraft || Coupons',
                         categories: categories,
-                        user: req.user
+                        user
   });
 });
 

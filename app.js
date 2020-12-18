@@ -83,7 +83,8 @@ app.use('/settings', SettingsRouter);
 
 var connect = mongoose.connect(config.mongoUrI, 
                                 { useNewUrlParser: true,
-                                  useUnifiedTopology: true
+                                  useUnifiedTopology: true,
+                                  useFindAndModify: false
                                 });
 
 connect.then((db) => {

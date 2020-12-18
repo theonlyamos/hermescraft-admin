@@ -1,0 +1,104 @@
+extends layout
+
+block styles
+  link(rel="stylesheet" type="text/css" href="/vendor/datatables/datatables.bundle.css")
+
+block content
+  .container1-page.bg-light
+    // Content page
+    .bread-crumb.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
+      a.s-text15(href="/")
+        i.la.la-home
+        i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+      a.s-text16(href="/customers")
+        | Customers
+        i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+      a.s-text16(href="/customers/"+customer._id)
+        | #{customer.username}
+        i.fa.fa-angle-right.m-l-8.m-r-9(aria-hidden="true")
+      span.s-text17
+        | Customer Orders
+    section.p-t-55.p-b-65
+      .container 
+        .m-grid__item.m-grid__item--fluid.m-wrapper
+          .m-content
+            .row
+              .col-xl-3.col-lg-4
+                .m-portlet.m-portlet--full-height.m-portlet--unair
+                  .m-portlet__body
+                    form#profileImageForm(action="/customers/upload" method="post" enctype="multipart/form-data")
+                      input(type="hidden" name="customer" value=customer._id)
+                      input.d-none(type="file" name="image" id="profileImage" onchange="uploadProfileImage(this)")
+                    .m-card-profile
+                      .m-card-profile__title.m--hide
+                        | Your Profile
+                      .m-card-profile__pic(style="cursor: pointer" onclick="$('#profileImage').click()")
+                        .m-card-profile__pic-wrapper
+                          if (customer.image)
+                            img(src=hermescraftUrl+"images/users/"+customer.image.name alt='')
+                          else
+                            i.fas.fa-user.fa-5x
+                      .m-card-profile__details
+                        span.m-card-profile__name #{customer.first_name} #{customer.last_name}
+                        a.m-card-profile__email.m-link(href='') #{customer.username}
+                    ul.m-nav.m-nav--hover-bg.m-portlet-fit--sides
+                      li.m-nav__separator.m-nav__separator--fit
+                      li.m-nav__section.m--hide
+                        span.m-nav__section-text Section
+                      li.m-nav__item
+                        a.m-nav__link(href='/customers/'+customer._id+'/orders')
+                          i.m-nav__link-icon.flaticon-cart
+                          span.m-nav__link-text Orders
+                          span.m-nav__link-badge
+                                span.m-badge.m-badge--success #{customer.orders}
+                      li.m-nav__item
+                        a.m-nav__link(href='header/profile&demo=default.html')
+                          i.m-nav__link-icon.flaticon-share
+                          span.m-nav__link-text Activity
+                     
+              .col-xl-9.col-lg-8
+                .m-portlet.m-portlet--mobile.m-portlet--unair
+                  .m-portlet__head.d-flex.justify-content-between.align-items-center
+                    .m-portlet__head-caption
+                      .m-portlet__head-title
+                        h3.m-portlet__head-text
+                          i.flaticon-cart.fa.fa-fw
+                          | Customer Orders
+                    .toolbar
+                      a.btn.btn-outline-danger.border-0(href='/customers/'+customer._id+'/orders/delete' title="Delete selected order(s)")
+                        i.flaticon-delete
+                        
+                  .m-portlet__body
+                    // Orders Datatable
+                    #m_datatable_latest_orders.m_datatable(style="min-height: 400px")
+                    
+                      
+block scripts
+  if (error)
+    script(type="text/javascript").
+        swal("Error", "#{errMsg}", "error");
+  if (message)
+    script(type="text/javascript").
+        swal("#{msgTitle}" ? "#{msgTitle}" : "Success", "#{message}", "success");
+  script(type="text/javascript").
+      $('.block2-btn-delete').on('click', function(e){
+        const button = $(this)
+        const contact = $(button).data('contact');
+        const url = $(button).data('url');
+
+        $("#confirm_delete_modal").modal("show")
+        const modal = $("#confirm_delete_modal");
+        modal.find('.name').html(contact);
+        modal.find(".modal-footer button[type='submit']").attr('onclick', `window.location.href='${url}'`)
+        e.preventDefault();
+        e.stopPropagation();
+      });
+      $('.block2-btn-view').on('click', function(e){
+        e.stopPropagation()
+      });
+  // ========================================================
+  script(src='/js/customers.js' type='text/javascript')
+  script(src="/js/image-preview.js")
+  // ========================================================
+  script(src="/vendor/datatables/datatables.bundle.js")
+  script(src="/vendor/datatables/buttons.js")

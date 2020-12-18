@@ -79,6 +79,7 @@ var handleFiles = function(e, slick=false) {
       else if (target.startsWith('profileImage')){
         const container = document.querySelector(".m-card-profile__pic-wrapper")
         const img = document.createElement("img")
+        img.style.height = "130px"
 
         const reader = new FileReader();
         reader.onload = (function (acontainer, img) {

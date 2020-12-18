@@ -57,8 +57,14 @@ html(lang="en")
             img(src="/images/icons/hermescraft-2.png" alt="IMG-LOGO")
           // Header Icon
           .header-icons3.pt-3.p-b-60.p-l-8
-            a.header-wrapicon1.dis-block.w-100.d-flex.flex-column.align-items-center(href="#")
-              i.fa.fa-user-circle.fa-3x.fa-fw.text-dark
+            a.header-wrapicon1.dis-block.w-100.d-flex.flex-column.align-items-center(href="/account")
+              if (user.image)
+                .m-widget4
+                  .m-widget4__item
+                    .m-widget4__img.m-widget4__img--pic
+                      img(src=hermescraftUrl+"images/users/"+user.image.name alt='')
+              else
+                i.fa.fa-user-circle.fa-3x.fa-fw.text-dark
               //small.text-secondary #{user.username}
           // Menu
           .wrap_menu

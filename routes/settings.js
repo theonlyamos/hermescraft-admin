@@ -1,5 +1,6 @@
 var express = require('express');
 const debug = require('../debugger');
+const User = require('../models/user');
 const { SiteInfo, SiteContact } = require('../models/settings');
 const router = express.Router();
 
@@ -18,11 +19,11 @@ get(async function(req, res, next) {
     req.session.message = ""
     req.session.error = false
     req.session.errMsg = ""
+
+    const user = await User.findById(req.user._id).populate('image')
     res.render('settings', { title: 'HermesCraft || Settings',
                         hermescraftUrl, hermescraftAdminUrl,
-                        user: req.user,
-                        siteInfo,
-                        message, error, errMsg
+                        user, siteInfo, message, error, errMsg
     });
   } 
   catch (error) {

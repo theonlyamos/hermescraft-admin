@@ -2,6 +2,7 @@ var express = require('express');
 var Product = require('../models/product');
 var Category = require('../models/category');
 var Order = require('../models/order');
+const User = require('../models/user');
 const {stripeSecretKey} = require('../config');
 const stripe = require('stripe')(stripeSecretKey)
 const { hermescraftUrl } = require('../config');
@@ -42,12 +43,13 @@ router
     req.session.error = undefined
     req.session.errMsg = undefined
 
+    const user = await User.findById(req.user._id).populate('image')
     res.render('orders', { title: 'HermesCraft || Orders',
                           orders, totalDocs, pagingCounter,
                           totalPages, limit, currentPage,
                           hermescraftUrl, message, 
                           msgTitle, error, errMsg,
-                          user: req.user
+                          user
 
     })
   }
@@ -117,7 +119,7 @@ router
 .route('/latest')
 .get(async(req, res, next)=>{
   try{
-    const result = await Order.paginate({})
+    const result = await Order.paginate({}, {populate: 'user'})
 		let data = result.docs
     for (let order of data){
       console.log(order)

@@ -1,0 +1,52 @@
+table.table.table-striped.table-hover#m_table_1
+  thead.bg-dark
+    tr.s-text15.text-white
+      th 
+        label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="all")
+          input(type="checkbox" id="all")
+          span
+      th Email
+      th Date
+      th Items Count
+      th Discount
+      th Tax
+      th Subtotal
+      th Total
+      th Actions
+  tbody
+    each order in orders
+      tr.s-text15(id=order._id)
+        td
+          label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="check_"+order._id)
+            input(type="checkbox" id="check_"+order._id)
+            span
+        td #{order.user.username}
+        td #{new Date(order.createdAt).toUTCString()}
+        td #{order.items_count}
+        td $#{order.discount}
+        td $#{order.tax}
+        td $#{order.subtotal}
+        td $#{order.total}
+        td
+            .m-portlet__head-tools
+              ul.m-portlet__nav
+                li.m-portlet__nav-item
+                  .m-dropdown.m-dropdown--inline.m-dropdown--arrow.m-dropdown--align-right.m-dropdown--align-push(m-dropdown-toggle='hover' aria-expanded='true')
+                    a.m-portlet__nav-link.btn.btn-lg.btn-secondary.m-btn.m-btn--icon.m-btn--icon-only.m-btn--pill.m-dropdown__toggle(href='#')
+                      i.la.la-ellipsis-h.m--font-brand
+                    .m-dropdown__wrapper
+                      span.m-dropdown__arrow.m-dropdown__arrow--right.m-dropdown__arrow--adjust
+                      .m-dropdown__inner
+                        .m-dropdown__body
+                          .m-dropdown__content
+                            ul.m-nav
+                              li.m-nav__section.m-nav__section--first
+                                span.m-nav__section-text Quick Actions
+                              li.m-nav__item
+                                a.m-nav__link(href=order.receipt_url target="_blank")
+                                  i.m-nav__link-icon.flaticon-list-1
+                                  span.m-nav__link-text Receipt
+                              li.m-nav__item
+                                a.m-nav__link(href='')
+                                  i.m-nav__link-icon.flaticon-delete
+                                  span.m-nav__link-text Delete

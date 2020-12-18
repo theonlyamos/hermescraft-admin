@@ -22,24 +22,26 @@ get(async function(req, res, next) {
     category.link = link
     categories[i] = category
   }
-  const products = await Product.find({}).populate('images').limit(8).exec();
+  const products = await Product.find({}).populate('images').limit(8)
   const ordersAggregate = await Order.aggregate([{$group: {_id: null, ordersTotal: {$sum: "$total"}}}])
   const ordersTotal = ordersAggregate.length ? ordersAggregate[0].ordersTotal : 0
   const ordersCount = await Order.countDocuments({})
   let result = await Order.paginate({}, {limit: 15, sort: {createdAt: -1}})
   const latestOrders = result.docs;
   const customersCount = await User.countDocuments({role: 'customer'});
-  result = await User.paginate({role: 'customer'}, {limit: 15, sort: {createdAt: -1}});
+  result = await User.paginate({role: 'customer'}, {limit: 15, sort: {createdAt: -1}, populate: 'image'});
   const newCustomers = result.docs;
   const productsCount = await Product.countDocuments({});
-  res.render('index', { title: 'HermesCraft || Admin',
+
+  const user = await User.findById(req.user._id).populate('image')
+  res.render('index', { title: 'HermesCraft || Admin Dashboard',
                         categories: categories,
                         products: products,
                         hermescraftUrl, hermescraftAdminUrl,
                         ordersCount, latestOrders,
                         ordersTotal, customersCount,
                         newCustomers, productsCount,
-                        user: req.user
+                        user
   });
 });
 

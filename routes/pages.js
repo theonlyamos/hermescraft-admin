@@ -3,12 +3,11 @@ var path = require('path');
 var fs = require('fs');
 var connectEnsureLoggedIn = require('connect-ensure-login');
 var Category = require('../models/category.js');
+const User = require('../models/user');
 const { Page, PageImage, PageSection, PageText, PageLink, CarouselImage, PageCarouselItem } = require('../models/page');
 var router = express.Router();
 
 const { hermescraftUrl } = require('../config');
-
-//router.use(connectEnsureLoggedIn.ensureLoggedIn())
 
 router.
 route('/').
@@ -31,11 +30,13 @@ get(async function(req, res, next) {
   delete(req.session.errMsg)
   delete(req.session.msgTitle)
   delete(req.session.message)
+
+  const user = await User.findById(req.user._id).populate('image')
   res.render('pages', { title: 'Administrator || Pages',
                               categories, pages, error,
                               errMsg, msgTitle, message,
                               hermescraftUrl,
-                              user: req.user
+                              user
   });
 });
 
@@ -51,9 +52,11 @@ get(async(req, res, next)=>{
     category.link = link
     categories[i] = category
   }
+
+  const user = await User.findById(req.user._id).populate('image')
   return res.render('add_page', {title: 'HermesCraft || Add Page',
                                   categories,hermescraftUrl,
-                                  user: req.user
+                                  user
   })
 }).
 post(async(req, res, next)=>{
@@ -73,11 +76,13 @@ post(async(req, res, next)=>{
           category.link = link
           categories[i] = category
         }
+
+        const user = await User.findById(req.user._id).populate('image')
         return res.render('add_page', {title: 'HermesCraft || Add Page',
                                         error: true,
                                         errMsg: "Image upload unsuccessful",
                                         categories: categories,
-                                        user: req.user
+                                        user
         })
       }
       
@@ -324,11 +329,13 @@ post(async(req, res, next)=>{
           category.link = link
           categories[i] = category
         }
+
+        const user = await User.findById(req.user._id).populate('image')
         return res.render('add_page', {title: 'HermesCraft || Add Product',
                                                 error: true,
                                                 errMsg: "Image upload unsuccessful",
                                                 categories: categories,
-                                                user: req.user
+                                                user
         })
       }
       
@@ -405,12 +412,14 @@ route('/:pageId')
   delete(req.session.errMsg)
   delete(req.session.msgTitle)
   delete(req.session.message)
+
+  const user = await User.findById(req.user._id).populate('image')
   return res.render('page', {title: `Page - ${page.name}`,
                               page, categories,
                               hermescraftUrl,
                               error, errMsg,
                               msgTitle, message,
-                              user: req.user
+                              user
                     })
 })
 

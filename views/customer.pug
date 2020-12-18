@@ -40,8 +40,8 @@ block content
                       li.m-nav__section.m--hide
                         span.m-nav__section-text Section
                       li.m-nav__item
-                        a.m-nav__link(href='header/profile&demo=default.html')
-                          i.m-nav__link-icon.flaticon-profile-1
+                        a.m-nav__link(href='/customers/'+customer._id+'/orders')
+                          i.m-nav__link-icon.flaticon-cart
                           span.m-nav__link-text Orders
                           span.m-nav__link-badge
                                 span.m-badge.m-badge--success #{customer.orders}

@@ -4,6 +4,7 @@ block styles
   link(rel="stylesheet" type="text/css" href="/vendor/datatables/datatables.bundle.css")
 
 block content
+  include includes/delete_modal.pug
   .container1-page.bg-light
     // breadcrumb
     .bread-crumb.flex-w.p-l-52.p-r-15.p-t-30.p-l-15-sm
@@ -28,8 +29,8 @@ block content
                 i.fas.fa-user-plus.fa-fw
                 small.ml-2 Add Customer
           .m-portlet__body
-            table.table.table-striped.table-hover#m_table_1
-              thead.m-datatable__head.bg-dark
+            table.table.table-striped.table-hover.table-light#m_table_1
+              thead.bg-secondary
                 tr.s-text15.text-white
                   th 
                     label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="all")
@@ -49,10 +50,10 @@ block content
                         input(type="checkbox" id="check_"+customer._id)
                         span
                     td
-                      if (customer.image.name)
-                        img(src=hermescraftUrl+"images/users/"+customer.image.name alt=customer.username style="width: 40px; height: auto; object-fit: cover")
+                      if (customer.image)
+                        img(src=hermescraftUrl+"images/users/"+customer.image.name alt=customer.username style="width: 40px; height: auto; object-fit: cover; border-radius: 50%; cursor: pointer" onclick="window.location.href='/customers/"+customer._id+"'")
                       else
-                        i.fas.fa-user.fa-3x.fa-fw
+                        i.fas.flaticon-profile-1.fa-3x.fa-fw
                     td #{customer.first_name} #{customer.last_name}
                     td #{customer.username}
                     td #{new Date(customer.createdAt).toUTCString()}
@@ -77,7 +78,7 @@ block content
                                               i.m-nav__link-icon.flaticon-customer
                                               span.m-nav__link-text Update Customer
                                           li.m-nav__item
-                                            a.m-nav__link(href="#confirm_delete_modal" data-toggle="modal" data-customer=customer.username data-url="/customers/update?action=delete&customer="+customer._id).block2-btn-delete
+                                            a.m-nav__link.block2-btn-delete(href="#confirm_delete_modal" data-toggle="modal" data-customer=customer.username data-url="/customers/update?action=delete&customer="+customer._id)
                                               i.m-nav__link-icon.fas.fa-user-minus.fa-fw 
                                               span.m-nav__link-text Delete Customer
                       
@@ -105,10 +106,25 @@ block content
                 a.item-pagination.flex-c-m.trans-0-4(href="/customers?view=table&page="+(parseInt(i)+1)) #{i+1}
 
 block scripts
+  if (error)
+    script(type="text/javascript").
+        swal("Error", "#{errMsg}", "error");
   if (message)
     script(type="text/javascript").
-        swal("Success", "#{message}", "success");
+        swal("#{msgTitle}" ? "#{msgTitle}" : "Success", "#{message}", "success");
+  script(type="text/javascript").
+      $('.block2-btn-delete').on('click', function(e){
+        const button = $(this)
+        const customer = $(button).data('customer');
+        const url = $(button).data('url');
 
+        $("#confirm_delete_modal").modal("show")
+        const modal = $("#confirm_delete_modal");
+        modal.find('.name').html(customer);
+        modal.find(".modal-footer button[type='submit']").attr('onclick', `window.location.href='${url}'`)
+        e.preventDefault();
+        e.stopPropagation();
+      });
   // ===============================================================================================
   //script(src="/js/customers.js")
   // ===============================================================================================

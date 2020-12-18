@@ -11,7 +11,6 @@ router.
 route('/').
 get(async function(req, res, next) {
   try {
-    const user = await User.findById(req.user._id).populate('image')
 
     const message = req.session.message
     const error = req.session.error
@@ -20,6 +19,8 @@ get(async function(req, res, next) {
     req.session.message = ""
     req.session.error = false
     req.session.errMsg = ""
+
+    const user = await User.findById(req.user._id).populate('image')
     res.render('account', { title: 'HermesCraft || Account',
                           hermescraftUrl, hermescraftAdminUrl,
                           user, message, error, errMsg

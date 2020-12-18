@@ -4,6 +4,7 @@ var fs = require('fs');
 var Category = require('../models/category.js');
 var Product = require('../models/product');
 var ProductImage = require('../models/product-image');
+const User = require('../models/user');
 const {stripeSecretKey} = require('../config');
 const Stripe = require('stripe')(stripeSecretKey);
 const { PageLink } = require("../models/page");
@@ -58,18 +59,14 @@ route('/')
   }
   const message = req.session.message
   req.session.message = ""
+
+  const user = await User.findById(req.user._id).populate('image')
   res.render('products', { title: 'HermesCraft || Products',
-                        categories,
-                        products,
-                        totalDocs,
-                        pagingCounter,
-                        totalPages,
-                        limit,
-                        currentPage,
+                        categories, products, totalDocs,
+                        pagingCounter, totalPages, limit,
+                        currentPage, hermescraftUrl,
                         view: req.session.products_view,
-                        hermescraftUrl,
-                        message: message,
-                        user: req.user
+                        message, user
   });
 })
 
@@ -89,10 +86,12 @@ route('/add')
   const errMsg = req.session.errMsg
   delete(req.session.error)
   delete(req.session.errMsg)
+
+  const user = await User.findById(req.user._id).populate('image')
   res.render('add_product', { title: 'HermesCraft || Add Product',
-                                    categories: categories,
-                                    error, errMsg, hermescraftUrl,
-                              user: req.user
+                              categories: categories,
+                              error, errMsg, hermescraftUrl,
+                              user
   });
 }).
 post(async(req, res, next)=>{
@@ -231,25 +230,35 @@ route('/:productId')
     category.link = link
     categories[i] = category
   }
+
+  const user = await User.findById(req.user._id).populate('image')
   return res.render('product', {title: `Product - ${newdoc.name}`,
                                       product: newdoc,
                                       categories: categories,
                                       hermescraftUrl,
-                                      user: req.user
+                                      user
                     })
 })
 
 router.
 route('/delete/:productId')
 .get(async(req, res, next)=>{
-  const prodId = req.params.productId
-  const doc = await Product.findByIdAndRemove(prodId).populate('images').exec().catch((error)=>console.log(error))
-  Array.prototype.forEach.call(doc.images, async(image, i)=>{
-    fs.unlink(path.resolve(__dirname, '..', '..', 'hermescraft', 'public', 'images', 'products', image.name), async()=>{
-      await ProductImage.findByIdAndRemove(image._id).exec().catch((error)=>console.log(error))
+  try {
+    const prodId = req.params.productId
+    const doc = await Product.findByIdAndRemove(prodId).populate('images').exec().catch((error)=>console.log(error))
+    Array.prototype.forEach.call(doc.images, async(image, i)=>{
+      fs.unlink(path.resolve(__dirname, '..', '..', 'hermescraft', 'public', 'images', 'products', image.name), async()=>{
+        await ProductImage.findByIdAndRemove(image._id).exec().catch((error)=>console.log(error))
+      })
     })
-  })
-  req.session.message = `${doc.name} deleted successfully!`
+    req.session.message = `${doc.name} deleted successfully!`
+  } 
+  catch (error) {
+    debug.error(error)
+    req.session.error = true
+    req.session.errMsg = "Error deleting product!"
+  }
+  
   return res.redirect('/products')
 })
 

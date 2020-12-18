@@ -48,8 +48,8 @@ block content
                         input(type="checkbox" id="check_"+administrator._id)
                         span
                     td
-                      if (administrator.image.name)
-                        img(src=hermescraftUrl+"images/users/"+administrator.image.name alt=administrator.username style="width: 40px; height: auto; object-fit: cover")
+                      if (administrator.image)
+                        img(src=hermescraftUrl+"images/users/"+administrator.image.name alt=administrator.username style="width: 40px; height: auto; object-fit: cover; border-radius: 50%; cursor: pointer"  onclick="window.location.href='/administrators/"+administrator._id+"'")
                       else
                         i.fas.fa-user-shield.fa-3x.fa-fw
                     td #{administrator.first_name} #{administrator.last_name}
@@ -103,9 +103,12 @@ block content
                 a.item-pagination.flex-c-m.trans-0-4(href="/products?view=table&page="+(parseInt(i)+1)) #{i+1}
 
 block scripts
+  if (error)
+    script(type="text/javascript").
+        swal("Error", "#{errMsg}", "error");
   if (message)
     script(type="text/javascript").
-        swal("Success", "#{message}", "success");
+        swal("#{msgTitle}" ? "#{msgTitle}" : "Success", "#{message}", "success");
   script(type="text/javascript").
       $('.block2-btn-delete').on('click', function(e){
         const button = $(this)

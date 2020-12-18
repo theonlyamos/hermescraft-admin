@@ -1,4 +1,4 @@
-var Dashboard = function () {
+var Account = function () {
   return {
     init: function () {
       var a, r;
@@ -43,5 +43,5 @@ const uploadProfileImage = async (e)=>{
   }
 }
 jQuery(document).ready(function () {
-  Dashboard.init()
+  Account.init()
 });

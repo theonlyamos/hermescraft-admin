@@ -23,10 +23,10 @@ block content
                 h3.m-portlet__head-text
                   | Orders
           .m-portlet__body
-            // Orders 
+            // Orders Datatable
             table.table.table-striped.table-hover#m_table_1
-              thead.bg-dark
-                tr.s-text15.text-white
+              thead.bg-light
+                tr.s-text15
                   th 
                     label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="all")
                       input(type="checkbox" id="all")
@@ -41,7 +41,7 @@ block content
                   th Actions
               tbody
                 each order in orders
-                  tr.s-text15(id=order._id)
+                  trs-text15(id=order._id)
                     td
                       label.m-checkbox.m-checkbox--solid.m-checkbox--single.m-checkbox--brand(for="check_"+order._id)
                         input(type="checkbox" id="check_"+order._id)
@@ -69,8 +69,7 @@ block content
                                           li.m-nav__section.m-nav__section--first
                                             span.m-nav__section-text Quick Actions
                                           li.m-nav__item
-                                            a.m-nav__link(href=order.receipt_url
-target="_blank")
+                                            a.m-nav__link(href=order.receipt_url target="_blank")
                                               i.m-nav__link-icon.flaticon-list-1
                                               span.m-nav__link-text Receipt
                                           li.m-nav__item
@@ -93,7 +92,7 @@ block scripts
         swal("Success", "#{message}", "success");
 
   // ===============================================================================================
-  script(src="/js/products.js")
+  //script(src="/js/orders.js")
   // ===============================================================================================
 
   // ===============================================================================================

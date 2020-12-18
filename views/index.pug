@@ -83,7 +83,7 @@ block content
                           | Total Customers
                         br
                         span.m-widget24__desc
-                          | Joined New User
+                          | All Registered Users
                         span.m-widget24__stats.m--font-success
                           | #{customersCount}
                         .m--space-10
@@ -108,7 +108,10 @@ block content
                       each customer in newCustomers
                         .m-widget4__item
                           .m-widget4__img.m-widget4__img--pic
-                            img(src=hermescraftUrl+"images/icons/icon-header-01.png" alt='')
+                            if (customer.image)
+                              img(src=hermescraftUrl+"images/users/"+customer.image.name style="cursor: pointer" onclick="window.location.href='/customers/"+customer._id+"'")
+                            else
+                              i.fas.flaticon-profile-1.fa-3x
                           .m-widget4__info
                             span.m-widget4__title
                               | #{customer.first_name} #{customer.last_name}
@@ -116,7 +119,7 @@ block content
                             span.m-widget4__sub
                               | #{customer.username}
                           .m-widget4__ext
-                            a.m-btn.m-btn--pill.m-btn--hover-brand.btn.btn-sm.btn-secondary.text-secondary(href='#') Details
+                            a.m-btn.m-btn--pill.m-btn--hover-brand.btn.btn-sm.btn-secondary.text-secondary(href='/customers/'+customer._id) Details
                       // end::Widget 14 Item 
                 // end:: Widgets/New Users
               .col-xl-8

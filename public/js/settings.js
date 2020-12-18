@@ -1,4 +1,4 @@
-var Dashboard = function () {
+var Settings = function () {
   return {
     init: function () {
       var a, r;
@@ -33,5 +33,5 @@ var Dashboard = function () {
   }
 }();
 jQuery(document).ready(function () {
-  Dashboard.init()
+  Settings.init()
 });
