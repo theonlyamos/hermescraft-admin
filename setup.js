@@ -541,14 +541,14 @@ const getAboutPage = async()=>{
 
 const runScript = async()=>{
   try {
-    //await siteSetup()
+    await siteSetup()
     //await resetHomePage()
     //await resetAboutPage()
-    await createCategories();
-    await createPages();
-    await createHomeCarousel();
-    await createHomeSections();
-    await createAboutSections();
+    //await createCategories();
+    //await createPages();
+    //await createHomeCarousel();
+    //await createHomeSections();
+    //await createAboutSections();
     //await getCategories();
     //await getHomePage();
     //await getAboutPage();
